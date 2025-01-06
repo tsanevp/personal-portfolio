@@ -1,37 +1,47 @@
 <template>
   <div
-    class="group project-card mb-4 text-white min-h-96 flex flex-col justify-end relative"
-    :style="{ backgroundImage: `url(/img/test.jpg)` }"
+    class="group project-card mb-7 md:min-h-[450px] sm:min-h-[375px] xs:min-h-[300px] min-h-[300px] flex flex-col justify-end relative overflow-hidden"
   >
-    <!-- Gradient Overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-t from-blue-400 via-transparent to-transparent"
-    ></div>
+    <a href="https://www.w3schools.com" style="margin-unset" target="_blank">
+      <div id="project-image" class="rounded-xl">
+        <img
+          class="absolute left-0 top-0 h-full w-full rounded-xl group-hover:scale-105 duration-300 ease-out opacity-70"
+          src="public\img\test.jpg"
+          :alt="`background for ${projectName} project`"
+        />
+      </div>
 
-    <!-- Content Area -->
-    <div id="card-footer" class="relative p-5">
+      <!-- Gradient Overlay -->
       <div
-        class="translate-y-12 group-hover:translate-y-0 transform ease-in-out duration-300"
-      >
-        <h3 class="text-xl font-bold group-hover:text-blue">{{ projectName }}</h3>
-        <div class="flex space-x-6 mb-2">
-          <StackItem icon-name="file-icons:vue" icon-label="Vue" icon-color="white" />
-          <StackItem icon-name="uil:react" icon-label="React" icon-color="white" />
-          <StackItem
-            icon-name="akar-icons:typescript-fill"
-            icon-label="TypeScript"
-            icon-color="white"
-          />d
+        class="absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+      ></div>
+
+      <!-- Content Area -->
+      <div id="card-footer" class="p-7">
+        <div
+          class="translate-y-12 group-hover:translate-y-0 transform ease-in-out duration-300"
+        >
+          <h2 class="text-2xl mb-2">{{ projectName }}</h2>
+          <div class="flex flex-wrap space-x-4 mb-4">
+            <StackItem icon-name="file-icons:vue" icon-label="Vue" icon-color="white" class="border p-2 rounded-xl" />
+            <StackItem icon-name="uil:react" icon-label="React" icon-color="white" class="border p-2 rounded-xl" />
+            <StackItem
+              icon-name="akar-icons:typescript-fill"
+              icon-label="TypeScript"
+              icon-color="white"
+              class="border p-2 rounded-xl"
+            />
+          </div>
+          <p class="">{{ projectDescription }}</p>
         </div>
-        <p>{{ projectDescription }}</p>
-      </div>
 
-      <div
-        class="translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
-      >
-        <LearnMoreButton :path="`/projects/${projectLink}`" class="mt-4" />
+        <div
+          class="translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
+        >
+          <LearnMoreButton :path="`/projects/${projectLink}`" class="mt-3" />
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
@@ -46,18 +56,12 @@ const { projectName, projectDescription, projectLink, stack } = defineProps([
 
 <style scoped>
 .project-card {
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.2s;
-  position: relative;
-}
-
-.project-card:hover {
-  transform: scale(1.01);
+  box-shadow: inset 0 -100px 100px #8c8c8c;
 }
 #card-footer-contents {
+  position: absolute;
+  bottom: 0;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Ensures text visibility */
 }
 
 .bg-gradient-to-t {
@@ -67,27 +71,9 @@ const { projectName, projectDescription, projectLink, stack } = defineProps([
     var(--tw-gradient-via),
     var(--tw-gradient-to)
   );
-  --tw-gradient-from: rgb(3, 19, 44); /* Blue */
-  --tw-gradient-via: rgba(59, 130, 246, 0); /* Transparent */
-  --tw-gradient-to: rgba(0, 0, 0, 0); /* Transparent */
-  opacity: 0.9; /* Slightly darkens the blend */
-}
-
-/* Slide-Up Transition */
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.slide-up-enter-from,
-.slide-up-leave-to {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-.slide-up-enter-to,
-.slide-up-leave-from {
-  transform: translateY(0);
-  opacity: 1;
+  --tw-gradient-from: #434343;
+  --tw-gradient-via: rgba(38, 38, 38, 0.1);
+  --tw-gradient-to: rgba(0, 0, 0, 0);
+  opacity: .8;
 }
 </style>

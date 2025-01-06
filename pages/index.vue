@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div id="section-about-me" class="card my-7">
+    <div id="section-about-me" class="card mt-8">
       <div class="flex justify-between">
-        <h1 class="text-xl">Peter Tsanev</h1>
-        <div id="socials" class="text-xl">
+        <h1 class="text-3xl">Peter Tsanev</h1>
+        <div id="socials" class="text-2xl">
           <a href="https://github.com/tsanevp" target="_blank">
             <Icon
               name="mdi:github"
@@ -31,38 +31,36 @@
         </div>
       </div>
 
-      <div class="flex text-sm mb-2 text-secondary">
+      <div class="flex mb-2 text-secondary">
         <Icon name="gis:pin" style="color: #8c8c8c; align-self: center" class="mr-2" />
         <p>Seattle, WA</p>
       </div>
 
-      <p>Full-stack Developer</p>
+      <p class="text-lg">Full-stack Developer</p>
     </div>
 
-    <div id="section-my-stack" class="mb-5">
-      <h1 class="text-xl">Current Stack</h1>
-      <div class="flex flex-wrap">
-        <StackItem icon-name="file-icons:vue" icon-label="Vue" />
-        <StackItem icon-name="uil:react" icon-label="React" />
-        <StackItem icon-name="akar-icons:typescript-fill" icon-label="TypeScript" />
-        <StackItem icon-name="akar-icons:javascript-fill" icon-label="JavaScript" />
+    <div id="section-my-stack" class="mt-8">
+      <h1 class="text-3xl mb-4">Current Stack</h1>
+      <div class="flex flex-wrap gap-5 text-lg">
         <StackItem icon-name="ri:java-fill" icon-label="Java" />
         <StackItem icon-name="devicon-plain:csharp" icon-label="C#" />
-        <StackItem icon-name="simple-icons:dotnet" icon-label=".NET" />
+        <StackItem icon-name="mdi:language-python" icon-label="Python" />
         <StackItem icon-name="flowbite:html-solid" icon-label="HTML" />
         <StackItem icon-name="flowbite:css-solid" icon-label="CSS" />
+        <StackItem icon-name="akar-icons:typescript-fill" icon-label="TypeScript" />
         <StackItem icon-name="akar-icons:javascript-fill" icon-label="JavaScript" />
+        <StackItem icon-name="file-icons:vue" icon-label="Vue" />
+        <StackItem icon-name="uil:react" icon-label="React" />
+        <StackItem icon-name="simple-icons:dotnet" icon-label=".NET" />
       </div>
     </div>
 
-    <div id="section-experience" class="mb-5">
-      <div class="flex justify-between mb-2">
-        <h1 class="text-xl">Work Experience</h1>
-        <NuxtLink to="/experience">
-          <p>See More</p>
-        </NuxtLink>
+    <div id="section-experience" class="mt-8">
+      <div class="flex justify-between mb-7">
+        <h1 class="text-3xl">Work Experience</h1>
+        <SeeMoreButton path="/experience" />
       </div>
-      <div id="list-experiences" class="timeline mt-12">
+      <div id="list-experiences" class="timeline">
         <ExperienceCard
           v-for="(experience, index) in experiences"
           :key="experience.companyName + experience.duration"
@@ -73,11 +71,9 @@
     </div>
 
     <div id="section-projects" class="mb-5">
-      <div class="flex justify-between mb-2">
-        <h1 class="text-xl">Projects</h1>
-        <NuxtLink to="/projects">
-          <p>See More</p>
-        </NuxtLink>
+      <div class="flex justify-between mb-5">
+        <h1 class="text-3xl">Projects</h1>
+        <SeeMoreButton path="/projects" />
       </div>
       <div id="list-experiences">
         <ProjectCard

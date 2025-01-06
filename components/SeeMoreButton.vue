@@ -1,14 +1,15 @@
 <template>
   <NuxtLink
     :to="`${path}`"
-    class="btn border-white"
+    class="flex flex-wrap content-center pl-2 pe-2"
     :class="{ 'btn-light': globalStore.lightMode, 'btn-dark': !globalStore.lightMode }"
   >
-    <p>Learn More</p>
+    <p class="pb-0">See More</p>
     <Icon
       name="material-symbols:arrow-forward-rounded"
       style="align-self: center"
-      class="ml-2 text-base"
+      class="ml-2 text-base pb-0"
+      size="20"
     />
   </NuxtLink>
 </template>
@@ -19,24 +20,18 @@ const { path } = defineProps(["path"]);
 </script>
 
 <style scoped>
-
 .btn-dark {
-
 }
 
 .btn-dark:hover {
-  background-color: #262626;
-  transition: 0.5s;
+  transition: 2s;
 }
 
 .btn-light {
-
 }
 
 .btn-light:hover {
-  background-color: white;
   transition: 0.5s;
   color: black;
-  border: 1px solid black;
 }
 </style>

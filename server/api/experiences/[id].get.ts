@@ -3,8 +3,6 @@ import Experiences from '../../models/experience';
 export default defineEventHandler(async (event) => {
   try {
     const { id } = event.context.params as { id: string };
-    console.log(id);
-
 
     // Fetch experience by id
     const experience = await Experiences.findById(id);
