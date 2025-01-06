@@ -1,0 +1,120 @@
+<template>
+  <div>
+    <header>
+      <nav id="nav-header" class="container mx-auto p-4 flex justify-between">
+        <NuxtLink to="/" class="font-bold">Peter Tsanev</NuxtLink>
+
+        <div class="hidden md:block">
+          <ul class="flex gap-10 not-active">
+            <li>
+              <NuxtLink to="/">Home</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/experience">Work Experience</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/projects">Projects</NuxtLink>
+            </li>
+            <li>
+              <a
+                href="https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing"
+                target="_blank"
+                >Resume</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="flex">
+          <Icon
+            v-if="globalStore.getLightMode"
+            name="tdesign:mode-dark"
+            style="color: black;"
+            @click="setLightMode()"
+            size="24"
+          />
+          <Icon
+            v-else
+            name="entypo:light-up"
+            style="color: white;"
+            @click="setLightMode()"
+            size="24"
+          />
+
+        <!-- Hamburger Icon -->
+        <div class="ml-4 md:hidden">
+          <Icon
+            name="solar:hamburger-menu-outline" size="24"
+            style="color: white;"
+            @click="toggleMenu"
+            aria-label="Toggle Menu"
+          />
+
+          <!-- Navigation Links -->
+          <ul
+            :class="[
+              'flex flex-col lg:flex-row lg:gap-10 bg-black lg:bg-transparent absolute lg:static top-16 lg:top-auto left-0 w-full lg:w-auto z-50 transition-all duration-300',
+              showMenu ? 'opacity-100 visible' : 'opacity-0 invisible lg:visible',
+            ]"
+          >
+            <li class="p-2 lg:p-0 text-center lg:text-left">
+              <NuxtLink to="/" class="block py-2 lg:py-0">Home</NuxtLink>
+            </li>
+            <li class="p-2 lg:p-0 text-center lg:text-left">
+              <NuxtLink to="/experience" class="block py-2 lg:py-0"
+                >Work Experience</NuxtLink
+              >
+            </li>
+            <li class="p-2 lg:p-0 text-center lg:text-left">
+              <NuxtLink to="/projects" class="block py-2 lg:py-0">Projects</NuxtLink>
+            </li>
+            <li class="p-2 lg:p-0 text-center lg:text-left">
+              <a
+                href="https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing"
+                target="_blank"
+                class="block py-2 lg:py-0"
+                >Resume</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      </nav>
+    </header>
+
+    <div class="container mx-auto max-w-screen-md px-auto p-4">
+      <slot />
+    </div>
+  </div>
+</template>
+
+<script setup>
+const globalStore = useGlobalStore();
+
+const showMenu = ref(false);
+
+function toggleMenu() {
+  showMenu.value = !showMenu.value;
+}
+
+function setLightMode() {
+  globalStore.setLightMode();
+}
+</script>
+
+<style lang="css" scoped>
+.not-active {
+  color: #8c8c8c;
+}
+
+li > .router-link-exact-active {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@media (min-width: 1536px) {
+  #nav-header {
+    max-width: 1280px;
+  }
+}
+</style>

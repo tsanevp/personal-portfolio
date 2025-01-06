@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-[#141414] text-base text-[#ffffff]; /* gray 1 */
+}
+
+@layer components {
+    .btn {
+        @apply bg-[#000000] text-white px-3 py-1 rounded-xl text-xs flex w-fit;
+    }
+
+    .card {
+        @apply p-5 rounded-md border border-[#bfbfbf] shadow-md h-full;
+    }
+
+    .project-card {
+        @apply rounded-md shadow-md h-full;
+    }
+
+    .text-secondary {
+        @apply text-[#8c8c8c]; /* gray 7 */
+    }
+}
