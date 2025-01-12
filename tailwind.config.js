@@ -9,7 +9,12 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customGrey: '#141414',
+        customBlue: '#adc6ff',
+      }
+    },
   },
   plugins: [],
 }

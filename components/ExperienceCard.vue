@@ -5,20 +5,24 @@
     </div>
     <div class="ml-8 content-card">
       <div class="mb-2">
-        <h3>{{ experience.companyName }}</h3>
+        <h3 class="text-customBlue">{{ experience.companyName }}</h3>
         <h2 class="text-lg font-bold">{{ experience.jobTitle }}</h2>
         <h2 class="text-sm text-secondary">{{ experience.duration }}</h2>
       </div>
       <div class="mb-3">
         <p>{{ experience.description }}</p>
       </div>
-      <LearnMoreButton :path="`/experiences/${experience.link}`" />
+      <LearnMoreButton :path="`/experiences/${getExperienceLink()}`" />
     </div>
   </div>
 </template>
 
 <script setup>
 const { experience, isLast } = defineProps(["experience", "isLast"]);
+
+function getExperienceLink() {
+  return experience.jobTitle.replace(/\s/g, '');
+}
 </script>
 
 <style scoped>
@@ -45,14 +49,15 @@ const { experience, isLast } = defineProps(["experience", "isLast"]);
 
 .timeline-pin {
   position: absolute;
-  left: -0.57rem;
+  left: -0.59rem;
+  top: -0.01rem;
 }
 
 .pin-head {
   width: 1rem;
   height: 1rem;
-  border: 4px #000000 solid;
+  border: 4px #f5f5f5 solid;
   border-radius: 100rem;
-  background: #bfbfbf;
+  background: #85a5ff; /* geekblue-4 */
 }
 </style>

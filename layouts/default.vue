@@ -3,9 +3,9 @@
     <header>
       <nav
         id="nav-header"
-        class="container mx-auto p-4 flex justify-between center-content"
+        class="container mx-auto p-4 flex justify-between center-content text-xl"
       >
-        <NuxtLink to="/" class="font-bold text-xl">Peter Tsanev</NuxtLink>
+        <NuxtLink to="/" class="font-bold text-2xl">Peter Tsanev</NuxtLink>
 
         <div class="hidden md:block">
           <ul class="flex gap-10 not-active h-full">
@@ -24,7 +24,7 @@
             </li>
             <li>
               <NuxtLink
-                to="/experience"
+                to="/experiences"
                 :class="[
                   { 'router-link-exact-active': $route.path === '/experience' },
                   { 'btn-light': globalStore.lightMode && $route.path !== '/experience' },
@@ -64,19 +64,11 @@
           </ul>
         </div>
         <div class="flex">
-          <Icon
-            v-if="globalStore.getLightMode"
-            name="tdesign:mode-dark"
-            style="color: black"
+          <ToggleVue3
+            onIcon="tdesign:mode-dark"
+            offIcon="entypo:light-up"
             @click="setLightMode()"
-            size="24"
-          />
-          <Icon
-            v-else
-            name="entypo:light-up"
-            style="color: white"
-            @click="setLightMode()"
-            size="24"
+            v-model="selected"
           />
 
           <!-- Hamburger Icon -->
@@ -124,6 +116,10 @@
     <div class="container mx-auto max-w-screen-md px-auto p-4">
       <slot />
     </div>
+
+    <!-- <footer>
+      <h1>peter</h1>
+    </footer> -->
   </div>
 </template>
 
@@ -131,6 +127,8 @@
 const globalStore = useGlobalStore();
 
 const showMenu = ref(false);
+const selected = ref(false);
+const toggleState = ref(false);
 
 const getActiveAndLightMode = computed(() => {
   return;
@@ -142,6 +140,12 @@ function toggleMenu() {
 
 function setLightMode() {
   globalStore.setLightMode();
+
+  if (globalStore.lightMode) {
+    document.body.classList.add("light-mode");
+  } else {
+    document.body.classList.remove("light-mode");
+  }
 }
 </script>
 
@@ -151,28 +155,32 @@ function setLightMode() {
 }
 
 .btn-light:hover {
-  color: #000; /* Light mode hover color */
-  transition: 0.2s;
+  color: #40a9ff;
+  transition: 0.5s;
 }
 
 .btn-dark:hover {
-  color: #f0f0f0; /* Dark mode hover color */
-  transition: 0.2s;
+  color: #adc6ff; /* geekblue-3 */
+  transition: 0.5s;
 }
 
 .router-link-exact-active {
   color: #ffffff;
-  font-weight: bold;
 }
 
 /* Prevent hover styles for active links */
 .router-link-exact-active:hover {
-  color: #ffffff; /* Keep the active link style */
+  color: #adc6ff; /* Keep the active link style */
+  transition: 0.5s;
 }
 
 @media (min-width: 1536px) {
   #nav-header {
     max-width: 1280px;
   }
+}
+
+.text-reset {
+  color: inherit;
 }
 </style>

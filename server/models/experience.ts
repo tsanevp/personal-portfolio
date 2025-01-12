@@ -6,6 +6,7 @@ const experienceSchema = new mongoose.Schema({
     duration: { type: String, required: true },
     description: { type: String, required: true },
     link: { type: String, required: true},
+    order: { type: Number, required: true }
 },
     { collection: "experience" }
 );
