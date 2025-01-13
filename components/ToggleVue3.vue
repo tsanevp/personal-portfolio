@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="modelValue ? 'bg-[--secondary-color]' : 'bg-[#8c8c8c]'"
+    :class="modelValue ? 'bg-[--seoncdary-color-green]' : 'bg-[#8c8c8c]'"
     @click="toggle"
     class="w-14 transition ease-in-out duration-200 h-100 flex items-center rounded-full p-1"
   >

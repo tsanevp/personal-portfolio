@@ -17,7 +17,7 @@
       <!-- Content Area -->
       <div id="card-footer" class="p-7">
         <div
-          class="translate-y-12 group-hover:translate-y-0 transform ease-in-out duration-300"
+          class="lg:translate-y-12 lg:group-hover:translate-y-0 transform ease-in-out duration-300"
         >
           <h2 class="text-2xl mb-2">{{ project.projectName }}</h2>
           <div class="flex flex-wrap space-x-4 mb-4">
@@ -33,9 +33,9 @@
         </div>
 
         <div
-          class="translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
+          class="lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
         >
-          <LearnMoreButton :path="getProjectLink()" class="mt-3" />
+          <LearnMoreButton :path="getProjectLink()" :border-white="true" class="mt-3" />
         </div>
       </div>
     </NuxtLink>
@@ -58,7 +58,7 @@ function getProjectLink() {
 
 <style scoped>
 .project-card {
-  box-shadow: inset 0 -75px 75px var(--secondary-color);
+  box-shadow: inset 0 -75px 75px var(--seoncdary-color-green);
 }
 #card-footer-contents {
   position: absolute;

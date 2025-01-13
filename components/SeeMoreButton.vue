@@ -1,8 +1,7 @@
 <template>
   <NuxtLink
     :to="`${path}`"
-    class="flex flex-wrap content-center hover-underline-animation"
-    :class="{ 'btn-light': globalStore.lightMode, 'btn-dark': !globalStore.lightMode }"
+    class="flex flex-wrap content-center hover-underline-animation see-more"
   >
     <p class="pb-0">See More</p>
     <Icon
@@ -15,24 +14,12 @@
 </template>
 
 <script setup>
-const globalStore = useGlobalStore();
 const { path } = defineProps(["path"]);
 </script>
 
 <style scoped>
-.btn-dark {
-}
-
-.btn-dark:hover {
+.see-more:hover {
   transition: var(--custom-transition);
-  color: var(--secondary-color);
-}
-
-.btn-light {
-}
-
-.btn-light:hover {
-  transition: 0.5s;
-  color: black;
+  color: var(--seoncdary-color-green);
 }
 </style>

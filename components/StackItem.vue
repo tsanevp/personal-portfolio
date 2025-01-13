@@ -10,8 +10,8 @@
 const globalStore = useGlobalStore();
 
 // Props
-const { iconName, iconLabel } = defineProps(['iconName', 'iconLabel', 'iconColor'])
+const { iconName, iconLabel, iconColor } = defineProps(['iconName', 'iconLabel', 'iconColor'])
 
 // Reactively compute icon & label color
-const color = computed(() => (globalStore.lightMode ? 'black' : 'white'));
+const color = computed(() => (iconColor ? iconColor : globalStore.lightMode ? 'black' : 'white'));
 </script>

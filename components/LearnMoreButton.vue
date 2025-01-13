@@ -3,8 +3,8 @@
     :to="`${path}`"
     class="btn"
     :class="{
-      'btn-light border-black': globalStore.lightMode,
-      'btn-dark border-white': !globalStore.lightMode,
+      'border-black': globalStore.lightMode && !borderWhite,
+      'border-white': !globalStore.lightMode,
     }"
   >
     <p>Learn More</p>
@@ -16,28 +16,32 @@
   </NuxtLink>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const globalStore = useGlobalStore();
-const { path } = defineProps(["path"]);
+
+const props = withDefaults(
+  defineProps<{
+    path: string;
+    borderWhite: boolean;
+  }>(),
+  {
+    borderWhite: false,
+  }
+);
+
+const { path, borderWhite } = props;
 </script>
 
 <style scoped>
-.btn-dark {
+.btn {
+  transition: all 0.5s ease;
 }
 
-.btn-dark:hover {
-  background-color: var(--secondary-color);
+.btn:hover {
+  background-color: var(--seoncdary-color-green);
   transition: var(--custom-transition);
   color: black;
-  border: black 1px solid; 
+  border: black 1px solid;
   border-radius: 0.5rem;
-}
-
-.btn-light {
-}
-
-.btn-light:hover {
-  background-color: #f0f0f0;
-  transition: 0.5s;
 }
 </style>

@@ -7,16 +7,12 @@
       >
         <NuxtLink to="/" class="font-bold text-2xl">Peter Tsanev</NuxtLink>
 
-        <div class="hidden md:block">
+        <div class="hidden lg:block">
           <ul class="flex gap-10 not-active h-full">
             <li>
               <NuxtLink
                 to="/"
-                :class="[
-                  { 'router-link-exact-active': $route.path === '/' },
-                  { 'btn-light': globalStore.lightMode && $route.path !== '/' },
-                  { 'btn-dark': !globalStore.lightMode && $route.path !== '/' },
-                ]"
+                :class="{ 'router-link-exact-active': $route.path === '/' }"
                 class="flex h-full content-center flex-wrap"
               >
                 Home
@@ -24,12 +20,17 @@
             </li>
             <li>
               <NuxtLink
+                to="/stack"
+                :class="{ 'router-link-exact-active': $route.path === '/stack' }"
+                class="flex h-full content-center flex-wrap"
+              >
+                Stack
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink
                 to="/experiences"
-                :class="[
-                  { 'router-link-exact-active': $route.path === '/experience' },
-                  { 'btn-light': globalStore.lightMode && $route.path !== '/experience' },
-                  { 'btn-dark': !globalStore.lightMode && $route.path !== '/experience' },
-                ]"
+                :class="{ 'router-link-exact-active': $route.path === '/experiences' }"
                 class="flex h-full content-center flex-wrap"
               >
                 Experience
@@ -38,11 +39,7 @@
             <li>
               <NuxtLink
                 to="/projects"
-                :class="[
-                  { 'router-link-exact-active': $route.path === '/projects' },
-                  { 'btn-light': globalStore.lightMode && $route.path !== '/projects' },
-                  { 'btn-dark': !globalStore.lightMode && $route.path !== '/projects' },
-                ]"
+                :class="{ 'router-link-exact-active': $route.path === '/projects' }"
                 class="flex h-full content-center flex-wrap"
               >
                 Projects
@@ -52,10 +49,6 @@
               <a
                 href="https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing"
                 target="_blank"
-                :class="{
-                  'btn-light': globalStore.lightMode,
-                  'btn-dark': !globalStore.lightMode,
-                }"
                 class="flex h-full content-center flex-wrap"
               >
                 Resume
@@ -72,10 +65,10 @@
           />
 
           <!-- Hamburger Icon -->
-          <div class="ml-4 md:hidden">
+          <div class="ml-4 lg:hidden flex h-full content-center flex-wrap">
             <Icon
               name="solar:hamburger-menu-outline"
-              size="24"
+              size="32"
               style="color: white"
               @click="toggleMenu"
               aria-label="Toggle Menu"
@@ -89,15 +82,48 @@
               ]"
             >
               <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink to="/" class="block py-2 lg:py-0">Home</NuxtLink>
-              </li>
-              <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink to="/experience" class="block py-2 lg:py-0"
-                  >Work Experience</NuxtLink
+                <NuxtLink
+                  to="/"
+                  class="block py-2 lg:py-0"
+                  :class="{
+                    'router-link-exact-active': $route.path === '/',
+                    'green': showMenu && $route.path === '/',
+                  }"
+                  >Home</NuxtLink
                 >
               </li>
               <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink to="/projects" class="block py-2 lg:py-0">Projects</NuxtLink>
+                <NuxtLink
+                  to="/stack"
+                  class="block py-2 lg:py-0"
+                  :class="{
+                    'router-link-exact-active': $route.path === '/stack',
+                    'green': showMenu && $route.path === '/stack',
+                  }"
+                  >Stack</NuxtLink
+                >
+              </li>
+              <li class="p-2 lg:p-0 text-center lg:text-left">
+                <NuxtLink
+                  to="/experiences"
+                  class="block py-2 lg:py-0"
+                  :class="{
+                    'router-link-exact-active': $route.path === '/experiences',
+                    'green': showMenu && $route.path === '/experiences',
+                  }"
+                  >Experience</NuxtLink
+                >
+              </li>
+              <li class="p-2 lg:p-0 text-center lg:text-left">
+                <NuxtLink
+                  to="/projects"
+                  class="block py-2 lg:py-0"
+                  :class="{
+                    'router-link-exact-active': $route.path === '/projects',
+                    'green': showMenu && $route.path === '/projects',
+                  }"
+                  >Projects</NuxtLink
+                >
               </li>
               <li class="p-2 lg:p-0 text-center lg:text-left">
                 <a
@@ -117,34 +143,17 @@
       <slot />
     </div>
 
-    <footer class="w-full flex justify-center items-center py-10 ">
+    <footer class="w-full flex justify-center items-center py-10">
       <div class="flex items-center space-x-5">
-        <!-- Left Section -->
         <div class="flex items-center space-x-1">
-          <Icon name="tdesign:copyright" size="16" class="text-2xl green" />
-          <p class="green">{{ new Date().getFullYear() }}</p>
-          <p>Peter Tsanev</p>
+          <Icon name="tdesign:copyright" size="16" class="text-2xl" />
+          <p>{{ new Date().getFullYear() }}</p>
+          <p class="green">Peter Tsanev</p>
         </div>
 
-        <!-- Divider -->
         <div class="h-6 border-l border-gray-400"></div>
 
-        <!-- Right Section -->
-        <div id="socials" class="flex items-center space-x-3 text-2xl">
-          <a href="https://github.com/tsanevp" target="_blank" class="icon-link">
-            <Icon name="mdi:github" size="16" :style="{ color: color }" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/tsanevpeter/"
-            target="_blank"
-            class="icon-link"
-          >
-            <Icon name="ri:linkedin-fill" size="16" :style="{ color: color }" />
-          </a>
-          <a href="mailto:petertsanev7@gmail.com" target="_blank" class="icon-link">
-            <Icon name="ic:outline-email" size="16" :style="{ color: color }" />
-          </a>
-        </div>
+        <Socials div-size="2" div-class="space-x-3" />
       </div>
     </footer>
   </div>
@@ -155,11 +164,6 @@ const globalStore = useGlobalStore();
 
 const showMenu = ref(false);
 const selected = ref(false);
-const toggleState = ref(false);
-
-const getActiveAndLightMode = computed(() => {
-  return;
-});
 
 function toggleMenu() {
   showMenu.value = !showMenu.value;
@@ -177,63 +181,24 @@ function setLightMode() {
 </script>
 
 <style lang="css" scoped>
+ul > li {
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
 ul > li:hover {
   transform: scale(1.1);
-  transition: all 0.3s ease;
+  color: var(--seoncdary-color-green);
 }
+
 .not-active {
   color: #8c8c8c;
 }
 
-.btn-light:hover {
-  color: #40a9ff;
-  transition: 0.5s;
-}
-
-.btn-dark:hover {
-  color: var(--secondary-color);
-  transition: 0.5s;
-}
-
 .router-link-exact-active {
-  color: #ffffff;
-}
-
-/* Prevent hover styles for active links */
-.router-link-exact-active:hover {
-  color: var(--secondary-color);
-  transition: 0.5s;
-}
-
-@media (min-width: 1536px) {
-  #nav-header {
-    max-width: 1280px;
-  }
+  color: var(--text-color);
 }
 
 .green {
-  color: var(--secondary-color);
-}
-
-.text-reset {
-  color: inherit;
-}
-
-#socials > a {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-#socials > a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
+  color: var(--seoncdary-color-green);
 }
 </style>

@@ -5,7 +5,7 @@
     </div>
     <div class="ml-8 content-card">
       <div class="mb-2">
-        <h3 class="text-customBlue">{{ experience.companyName }}</h3>
+        <h3 class="seoncdary-color-green">{{ experience.companyName }}</h3>
         <h2 class="text-lg font-bold">{{ experience.jobTitle }}</h2>
         <h2 class="text-sm text-secondary">{{ experience.duration }}</h2>
       </div>
@@ -21,7 +21,7 @@
 const { experience, isLast } = defineProps(["experience", "isLast"]);
 
 function getExperienceLink() {
-  return experience.jobTitle.replace(/\s/g, '');
+  return experience.jobTitle.replace(/\s/g, "");
 }
 </script>
 
@@ -29,22 +29,22 @@ function getExperienceLink() {
 .row {
   width: 100%;
   display: flex;
-  position: relative; 
+  position: relative;
   flex-direction: row;
 }
 
 .element {
-  border-left: 3px solid #bfbfbf; /* Set a transparent left border */
+  border-left: 3px solid #bfbfbf;
 }
 
 .content-card {
-    position: relative;
-    top: -2rem;
+  position: relative;
+  top: -2rem;
 }
 
 .vertical-line-transparent {
-    border-left: 3px solid transparent;
-    position: relative; /* To position pin correctly */
+  border-left: 3px solid transparent;
+  position: relative;
 }
 
 .timeline-pin {
@@ -58,6 +58,11 @@ function getExperienceLink() {
   height: 1rem;
   border: 4px #f5f5f5 solid;
   border-radius: 100rem;
-  background: var(--secondary-color); /* geekblue-4 */
+  background: var(--seoncdary-color-green);
 }
+
+.seoncdary-color-green {
+  color: var(--seoncdary-color-green)
+}
+
 </style>

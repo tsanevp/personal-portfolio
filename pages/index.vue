@@ -9,32 +9,7 @@
     <div id="section-about-me" class="card mt-8">
       <div class="flex justify-between">
         <h1 class="text-3xl">Peter Tsanev</h1>
-        <div id="socials" class="text-2xl flex space-x-4">
-          <a href="https://github.com/tsanevp" target="_blank" class="h-100">
-            <Icon
-              name="mdi:github"
-              :style="{ color: color }"
-              size="18px"
-              style="align-self: center"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/tsanevpeter/" target="_blank">
-            <Icon
-              name="ri:linkedin-fill"
-              :style="{ color: color }"
-              size="18px"
-              style="align-self: center"
-            />
-          </a>
-          <a href="mailto:petertsanev7@gmail.com" target="_blank">
-            <Icon
-              name="ic:outline-email"
-              :style="{ color: color }"
-              size="18px"
-              style="align-self: center"
-            />
-          </a>
-        </div>
+        <Socials />
       </div>
 
       <div class="flex mb-2 text-secondary">
@@ -112,8 +87,6 @@ const isLoading = ref(true);
 // const loadingDuration = Math.random() + 1;
 
 // Reactively compute icon & label color
-const color = computed(() => (globalStore.lightMode ? "black" : "white"));
-
 onMounted(async () => {
   try {
     const experiencesResponse = await $fetch("/api/experiences");
@@ -146,24 +119,6 @@ h1 {
   display: flex;
   flex-direction: column;
   position: relative;
-}
-
-#socials > a {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 2.25rem;
-  height: 2.25rem; 
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px; 
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-#socials > a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
 }
 
 /* 
