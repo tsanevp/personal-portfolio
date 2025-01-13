@@ -26,8 +26,11 @@ const { path } = defineProps(["path"]);
 }
 
 .btn-dark:hover {
-  background-color: #262626;
-  transition: 0.5s;
+  background-color: var(--secondary-color);
+  transition: var(--custom-transition);
+  color: black;
+  border: black 1px solid; 
+  border-radius: 0.5rem;
 }
 
 .btn-light {

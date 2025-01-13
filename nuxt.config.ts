@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     },
   },
   ui: {
-    safelistColors: ['customGrey', 'customBlue']
+    safelistColors: ['customGrey', 'customBlue', 'customGreen']
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },

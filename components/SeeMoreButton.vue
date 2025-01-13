@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`${path}`"
-    class="flex flex-wrap content-center pl-2 pe-2"
+    class="flex flex-wrap content-center hover-underline-animation"
     :class="{ 'btn-light': globalStore.lightMode, 'btn-dark': !globalStore.lightMode }"
   >
     <p class="pb-0">See More</p>
@@ -24,7 +24,8 @@ const { path } = defineProps(["path"]);
 }
 
 .btn-dark:hover {
-  transition: 2s;
+  transition: var(--custom-transition);
+  color: var(--secondary-color);
 }
 
 .btn-light {

@@ -6,6 +6,8 @@
 :root {
     --bg-color: #141414;
     --text-color: #ffffff;
+    --secondary-color: #00dc82;
+    --custom-transition: 0.3s ease-in-out;
 }
 
 body {
@@ -19,6 +21,29 @@ body {
     --bg-color: #ffffff;
     --text-color: #141414;
 }
+
+.hover-underline-animation {
+    position: relative;
+  }
+  
+  .hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: transform 0.25s ease-out;
+    transform-origin: bottom left;
+  
+  }
+  
+  .hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 
 /* Grid Background */
 /* body::before {

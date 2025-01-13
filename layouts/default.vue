@@ -113,13 +113,40 @@
       </nav>
     </header>
 
-    <div class="container mx-auto max-w-screen-md px-auto p-4">
+    <div class="container mx-auto max-w-screen-md px-auto p-4 border-b border-[#8c8c8c]">
       <slot />
     </div>
 
-    <!-- <footer>
-      <h1>peter</h1>
-    </footer> -->
+    <footer class="w-full flex justify-center items-center py-10 ">
+      <div class="flex items-center space-x-5">
+        <!-- Left Section -->
+        <div class="flex items-center space-x-1">
+          <Icon name="tdesign:copyright" size="16" class="text-2xl green" />
+          <p class="green">{{ new Date().getFullYear() }}</p>
+          <p>Peter Tsanev</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-6 border-l border-gray-400"></div>
+
+        <!-- Right Section -->
+        <div id="socials" class="flex items-center space-x-3 text-2xl">
+          <a href="https://github.com/tsanevp" target="_blank" class="icon-link">
+            <Icon name="mdi:github" size="16" :style="{ color: color }" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/tsanevpeter/"
+            target="_blank"
+            class="icon-link"
+          >
+            <Icon name="ri:linkedin-fill" size="16" :style="{ color: color }" />
+          </a>
+          <a href="mailto:petertsanev7@gmail.com" target="_blank" class="icon-link">
+            <Icon name="ic:outline-email" size="16" :style="{ color: color }" />
+          </a>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -150,6 +177,10 @@ function setLightMode() {
 </script>
 
 <style lang="css" scoped>
+ul > li:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
 .not-active {
   color: #8c8c8c;
 }
@@ -160,7 +191,7 @@ function setLightMode() {
 }
 
 .btn-dark:hover {
-  color: #adc6ff; /* geekblue-3 */
+  color: var(--secondary-color);
   transition: 0.5s;
 }
 
@@ -170,7 +201,7 @@ function setLightMode() {
 
 /* Prevent hover styles for active links */
 .router-link-exact-active:hover {
-  color: #adc6ff; /* Keep the active link style */
+  color: var(--secondary-color);
   transition: 0.5s;
 }
 
@@ -180,7 +211,29 @@ function setLightMode() {
   }
 }
 
+.green {
+  color: var(--secondary-color);
+}
+
 .text-reset {
   color: inherit;
+}
+
+#socials > a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+#socials > a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 </style>

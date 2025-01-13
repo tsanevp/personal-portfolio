@@ -58,6 +58,6 @@ function getExperienceLink() {
   height: 1rem;
   border: 4px #f5f5f5 solid;
   border-radius: 100rem;
-  background: #85a5ff; /* geekblue-4 */
+  background: var(--secondary-color); /* geekblue-4 */
 }
 </style>

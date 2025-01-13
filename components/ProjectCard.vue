@@ -58,7 +58,7 @@ function getProjectLink() {
 
 <style scoped>
 .project-card {
-  box-shadow: inset 0 -75px 75px #adc6ff;
+  box-shadow: inset 0 -75px 75px var(--secondary-color);
 }
 #card-footer-contents {
   position: absolute;
@@ -73,8 +73,8 @@ function getProjectLink() {
     var(--tw-gradient-via),
     var(--tw-gradient-to)
   );
-  --tw-gradient-from: #434343;
-  --tw-gradient-via: rgba(38, 38, 38, 0.4);
+  --tw-gradient-from: #000000;
+  --tw-gradient-via: rgba(38, 38, 38, 0.3);
   --tw-gradient-to: rgba(0, 0, 0, 0);
   opacity: 1;
 }

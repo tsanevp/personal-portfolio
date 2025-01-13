@@ -9,29 +9,29 @@
     <div id="section-about-me" class="card mt-8">
       <div class="flex justify-between">
         <h1 class="text-3xl">Peter Tsanev</h1>
-        <div id="socials" class="text-2xl">
-          <a href="https://github.com/tsanevp" target="_blank">
+        <div id="socials" class="text-2xl flex space-x-4">
+          <a href="https://github.com/tsanevp" target="_blank" class="h-100">
             <Icon
               name="mdi:github"
               :style="{ color: color }"
+              size="18px"
               style="align-self: center"
-              class="mr-2"
             />
           </a>
           <a href="https://www.linkedin.com/in/tsanevpeter/" target="_blank">
             <Icon
               name="ri:linkedin-fill"
               :style="{ color: color }"
+              size="18px"
               style="align-self: center"
-              class="mr-2"
             />
           </a>
           <a href="mailto:petertsanev7@gmail.com" target="_blank">
             <Icon
               name="ic:outline-email"
               :style="{ color: color }"
+              size="18px"
               style="align-self: center"
-              class="mr-2"
             />
           </a>
         </div>
@@ -46,7 +46,10 @@
     </div>
 
     <div id="section-my-stack" class="mt-8">
-      <h1 class="text-3xl mb-2">Current Stack</h1>
+      <div class="flex justify-between mb-2">
+        <h1 class="text-3xl">Current Stack</h1>
+        <SeeMoreButton path="/stack" />
+      </div>
       <div class="mb-3">
         <h2 class="text-xl mb-1 text-secondary">Frontend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
@@ -144,6 +147,25 @@ h1 {
   flex-direction: column;
   position: relative;
 }
+
+#socials > a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 2.25rem;
+  height: 2.25rem; 
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px; 
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+#socials > a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
 /* 
 .container {
   width: 400px;

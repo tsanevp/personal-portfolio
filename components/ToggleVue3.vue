@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="modelValue ? 'bg-[#adc6ff]' : 'bg-[#8c8c8c]'"
+    :class="modelValue ? 'bg-[--secondary-color]' : 'bg-[#8c8c8c]'"
     @click="toggle"
     class="w-14 transition ease-in-out duration-200 h-100 flex items-center rounded-full p-1"
   >
@@ -17,7 +17,7 @@
             size="20"
             class="w-100"
           />
-          <Icon v-else :name="offIcon" style="color: #adc6ff" size="20" class="w-100" />
+          <Icon v-else :name="offIcon" style="color: #00dc82" size="20" class="w-100" />
         </div>
       </Transition>
     </div>
