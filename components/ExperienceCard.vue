@@ -56,7 +56,7 @@ function getExperienceLink() {
 .pin-head {
   width: 1rem;
   height: 1rem;
-  border: 4px #f5f5f5 solid;
+  border: 4px var(--text-color) solid;
   border-radius: 100rem;
   background: var(--seoncdary-color-green);
 }

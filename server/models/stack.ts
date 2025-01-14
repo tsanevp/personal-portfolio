@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 
 const stackSchema = new mongoose.Schema({
-    companyName: { type: String, required: true },
-    jobTitle: { type: String, required: true },
-    duration: { type: String, required: true },
+    frontend: { type: Array, required: true },
+    backend: { type: Array, required: true },
 },
     { collection: "stack" }
 );
 
-const Stack = mongoose.model('projects', stackSchema);
+const Stack = mongoose.model('stack', stackSchema);
 
 export default Stack;

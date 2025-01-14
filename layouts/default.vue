@@ -3,11 +3,11 @@
     <header>
       <nav
         id="nav-header"
-        class="container mx-auto p-4 flex justify-between center-content text-xl"
+        class="md:container mx-auto p-4 flex items-center justify-between relative text-xl"
       >
-        <NuxtLink to="/" class="font-bold text-2xl">Peter Tsanev</NuxtLink>
+        <NuxtLink to="/" class="font-bold text-2xl mr-auto">Peter Tsanev</NuxtLink>
 
-        <div class="hidden lg:block">
+        <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
           <ul class="flex gap-10 not-active h-full">
             <li>
               <NuxtLink
@@ -56,7 +56,7 @@
             </li>
           </ul>
         </div>
-        <div class="flex">
+        <div class="flex ml-auto">
           <ToggleVue3
             onIcon="tdesign:mode-dark"
             offIcon="entypo:light-up"
@@ -65,11 +65,10 @@
           />
 
           <!-- Hamburger Icon -->
-          <div class="ml-4 lg:hidden flex h-full content-center flex-wrap">
+          <div class="ml-4 lg:hidden flex h-full justify-center items-center">
             <Icon
               name="solar:hamburger-menu-outline"
-              size="32"
-              style="color: white"
+              class="text-3xl"
               @click="toggleMenu"
               aria-label="Toggle Menu"
             />

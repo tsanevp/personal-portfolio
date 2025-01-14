@@ -26,7 +26,7 @@
               :icon-name="icon?.name"
               :icon-label="icon.label"
               icon-color="white"
-              class="border p-2 rounded-xl"
+              class="border p-2 rounded-xl xs-text"
             />
           </div>
           <p class="">{{ project.projectDescription }}</p>
@@ -77,5 +77,19 @@ function getProjectLink() {
   --tw-gradient-via: rgba(38, 38, 38, 0.3);
   --tw-gradient-to: rgba(0, 0, 0, 0);
   opacity: 1;
+}
+
+@media (max-width: 375px) {
+    .xs-text {
+        font-size: 10px;
+        /* Scale down for smaller screens */
+    }
+}
+
+@media (max-width: 340px) {
+    .xs-text {
+        font-size: 8px;
+        /* Scale down for smaller screens */
+    }
 }
 </style>

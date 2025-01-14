@@ -9,15 +9,14 @@
       class="w-6 h-6 transition-all ease-in-out duration-200 transform bg-white rounded-full shadow-md flex content-center justify-center"
     >
       <Transition name="fade">
-        <div class="w-100 h-100">
+        <div class="w-100 h-100 text-lg">
           <Icon
             v-if="modelValue"
             :name="onIcon"
             style="color: #8c8c8c"
-            size="20"
             class="w-100"
           />
-          <Icon v-else :name="offIcon" style="color: #00dc82" size="20" class="w-100" />
+          <Icon v-else :name="offIcon" style="color: #00dc82" class="w-100" />
         </div>
       </Transition>
     </div>

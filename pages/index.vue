@@ -8,12 +8,12 @@
 
     <div id="section-about-me" class="card mt-8">
       <div class="flex justify-between">
-        <h1 class="text-3xl">Peter Tsanev</h1>
+        <h1 class="text-2xl md:text-3xl">Peter Tsanev</h1>
         <Socials />
       </div>
 
       <div class="flex mb-2 text-secondary">
-        <Icon name="gis:pin" style="color: #8c8c8c; align-self: center" class="mr-2" />
+        <Icon name="gis:pin" style="align-self: center" class="mr-2" />
         <p>Seattle, WA</p>
       </div>
 
@@ -28,21 +28,13 @@
       <div class="mb-3">
         <h2 class="text-xl mb-1 text-secondary">Frontend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
-          <StackItem icon-name="flowbite:html-solid" icon-label="HTML" />
-          <StackItem icon-name="flowbite:css-solid" icon-label="CSS" />
-          <StackItem icon-name="akar-icons:typescript-fill" icon-label="TypeScript" />
-          <StackItem icon-name="akar-icons:javascript-fill" icon-label="JavaScript" />
-          <StackItem icon-name="file-icons:vue" icon-label="Vue" />
-          <StackItem icon-name="uil:react" icon-label="React" />
+          <StackItem v-for="icon in stack.frontend" :icon-name="icon.name" :icon-label="icon.label" />
         </div>
       </div>
       <div>
         <h2 class="text-xl mb-1 text-secondary">Backend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
-          <StackItem icon-name="ri:java-fill" icon-label="Java" />
-          <StackItem icon-name="mdi:language-python" icon-label="Python" />
-          <StackItem icon-name="devicon-plain:csharp" icon-label="C#" />
-          <StackItem icon-name="simple-icons:dotnet" icon-label=".NET" />
+          <StackItem v-for="icon in stack.backend" :icon-name="icon.name" :icon-label="icon.label" />
         </div>
       </div>
     </div>
@@ -82,6 +74,7 @@
 const globalStore = useGlobalStore();
 const experiences = ref([]);
 const projects = ref([]);
+const stack = ref([]);
 const isLoading = ref(true);
 
 // const loadingDuration = Math.random() + 1;
@@ -91,14 +84,17 @@ onMounted(async () => {
   try {
     const experiencesResponse = await $fetch("/api/experiences");
     const projectsResponse = await $fetch("/api/projects");
-    if (experiencesResponse.success && projectsResponse.success) {
+    const stackResponse = await $fetch("/api/stack");
+    if (experiencesResponse.success && projectsResponse.success && stackResponse.success) {
       experiences.value = experiencesResponse.data;
       projects.value = projectsResponse.data;
+      stack.value = stackResponse.data[0];
     } else {
       console.error(
         "Error fetching experiences or projects:",
         experiencesResponse.error,
-        projectsResponse.error
+        projectsResponse.error,
+        stack.error
       );
     }
   } catch (err) {

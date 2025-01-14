@@ -12,6 +12,24 @@
     --font-weight: inherit;
 }
 
+html {
+    font-size: var(--font-size);
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+        /* Scale down for smaller screens */
+    }
+}
+
+@media (max-width: 425px) {
+    html {
+        font-size: 12px;
+        /* Scale down for smaller screens */
+    }
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -29,9 +47,9 @@ body {
 
 .hover-underline-animation {
     position: relative;
-  }
-  
-  .hover-underline-animation::after {
+}
+
+.hover-underline-animation::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -42,13 +60,13 @@ body {
     background-color: var(--seoncdary-color-green);
     transition: transform 0.25s ease-out;
     transform-origin: bottom left;
-  
-  }
-  
-  .hover-underline-animation:hover::after {
+
+}
+
+.hover-underline-animation:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
 
 /* Grid Background */
 /* body::before {
@@ -85,7 +103,8 @@ body {
     }
 
     .text-secondary {
-        @apply text-[#8c8c8c]; /* gray 7 */
+        @apply text-[#8c8c8c];
+        /* gray 7 */
     }
 }
 
@@ -95,6 +114,7 @@ body {
         width: 0px;
         height: 0px;
     }
+
     100% {
         width: 100%;
         height: 100%;
