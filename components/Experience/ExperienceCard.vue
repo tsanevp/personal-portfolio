@@ -9,20 +9,15 @@
         <h2 class="text-lg font-bold">{{ experience.jobTitle }}</h2>
         <h2 class="text-sm text-secondary">{{ experience.duration }}</h2>
       </div>
-      <div class="mb-3">
+      <div>
         <p>{{ experience.description }}</p>
       </div>
-      <LearnMoreButton :path="`/experiences/${getExperienceLink()}`" />
     </div>
   </div>
 </template>
 
 <script setup>
 const { experience, isLast } = defineProps(["experience", "isLast"]);
-
-function getExperienceLink() {
-  return experience.jobTitle.replace(/\s/g, "");
-}
 </script>
 
 <style scoped>
@@ -64,5 +59,4 @@ function getExperienceLink() {
 .seoncdary-color-green {
   color: var(--seoncdary-color-green)
 }
-
 </style>

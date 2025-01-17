@@ -17,8 +17,8 @@ const rootFontSize = 16;
 
 const props = withDefaults(
   defineProps<{
-    divSize: number;
-    divClass: string;
+    divSize?: number;
+    divClass?: string;
   }>(),
   {
     divSize: 2.25,

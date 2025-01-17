@@ -57,7 +57,7 @@
           </ul>
         </div>
         <div class="flex ml-auto">
-          <ToggleVue3
+          <ToggleButton
             onIcon="tdesign:mode-dark"
             offIcon="entypo:light-up"
             @click="setLightMode()"
@@ -76,7 +76,7 @@
             <!-- Navigation Links -->
             <ul
               :class="[
-                'flex flex-col lg:flex-row lg:gap-10 bg-black lg:bg-transparent absolute lg:static top-16 lg:top-auto left-0 w-full lg:w-auto z-50 transition-all duration-300',
+                'flex flex-col bg-black rounded-xl absolute top-16 right-0 w-1/2 z-50 transition-all duration-300 text-white font-medium',
                 showMenu ? 'opacity-100 visible' : 'opacity-0 invisible lg:visible',
               ]"
             >
@@ -152,13 +152,15 @@
 
         <div class="h-6 border-l border-gray-400"></div>
 
-        <Socials div-size="2" div-class="space-x-3" />
+        <Socials :div-size="2" div-class="space-x-3" />
       </div>
     </footer>
   </div>
 </template>
 
 <script setup>
+import ToggleButton from '~/components/Shared/ToggleButton.vue';
+
 const globalStore = useGlobalStore();
 
 const showMenu = ref(false);

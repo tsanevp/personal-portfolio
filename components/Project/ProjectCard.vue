@@ -23,6 +23,7 @@
           <div class="flex flex-wrap space-x-4 mb-4">
             <StackItem
               v-for="icon in project.stack"
+              :key="icon?.name"
               :icon-name="icon?.name"
               :icon-label="icon.label"
               icon-color="white"
@@ -35,7 +36,7 @@
         <div
           class="lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
         >
-          <LearnMoreButton :path="getProjectLink()" :border-white="true" class="mt-3" />
+          <ProjectLearnMoreButton :path="getProjectLink()" :border-white="true" class="mt-3" />
         </div>
       </div>
     </NuxtLink>

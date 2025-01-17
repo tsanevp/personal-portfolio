@@ -22,7 +22,7 @@ const globalStore = useGlobalStore();
 const props = withDefaults(
   defineProps<{
     path: string;
-    borderWhite: boolean;
+    borderWhite?: boolean;
   }>(),
   {
     borderWhite: false,
