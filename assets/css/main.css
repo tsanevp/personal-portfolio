@@ -68,6 +68,10 @@ body {
     transform-origin: bottom left;
 }
 
+h1 {
+    font-weight: bold;
+}
+
 /* Grid Background */
 /* body::before {
     z-index: -1000;

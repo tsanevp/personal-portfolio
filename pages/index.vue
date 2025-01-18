@@ -23,7 +23,7 @@
         <h2 class="text-xl mb-1 text-secondary">Frontend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
           <StackItem
-            v-for="icon in stack.frontend"
+            v-for="icon in safeStack.frontend"
             :icon-name="icon.name"
             :icon-label="icon.label"
           />
@@ -33,7 +33,7 @@
         <h2 class="text-xl mb-1 text-secondary">Backend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
           <StackItem
-            v-for="icon in stack.backend"
+            v-for="icon in safeStack.backend"
             :icon-name="icon.name"
             :icon-label="icon.label"
           />
@@ -72,16 +72,26 @@
   </div>
 </template>
 
-<script setup>
-const experiences = ref([]);
-const projects = ref([]);
-const stack = ref([]);
+<script setup lang="ts">
+import type { Api } from "~/types/api";
+
+const experiences = ref<Api.Experience[]>([]);
+const projects = ref<Api.Project[]>([]);
+const stack = ref<Api.Stack | null>(null);
+const safeStack = computed(() => ({
+  frontend: stack.value?.frontend || [],
+  backend: stack.value?.backend || [],
+  cloudAndDevops: stack.value?.cloudAndDevops || [],
+  databases: stack.value?.databases || [],
+}));
 
 onMounted(async () => {
   try {
-    const experiencesResponse = await $fetch("/api/experiences?limit=3");
-    const projectsResponse = await $fetch("/api/projects");
-    const stackResponse = await $fetch("/api/stack");
+    const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
+      "/api/experiences?limit=3"
+    );
+    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>("/api/projects");
+    const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
     if (
       experiencesResponse.success &&
       projectsResponse.success &&
@@ -95,7 +105,7 @@ onMounted(async () => {
         "Error fetching experiences or projects:",
         experiencesResponse.error,
         projectsResponse.error,
-        stack.error
+        stackResponse.error
       );
     }
   } catch (err) {
@@ -105,9 +115,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: bold;
-}
 .timeline {
   width: 100%;
   padding: 1rem;

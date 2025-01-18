@@ -1,7 +1,7 @@
 <template>
-  <div id="section-experience" class="mt-8">
-    <div class="flex justify-between mb-7">
-      <h1 class="text-3xl">Experience</h1>
+  <div id="section-experience" class="">
+    <div class="mb-7">
+      <h1 class="text-3xl mb-7">Experience</h1>
     </div>
     <div id="list-experiences" class="timeline">
       <ExperienceCard
@@ -11,19 +11,41 @@
         :is-last="index === experiences.length - 1"
       />
     </div>
+
+    <div id="section-experience">
+      <div class="mb-7">
+        <h1 class="text-3xl">Education</h1>
+      </div>
+      <div v-for="item in education">
+        {{ item.schoolName }}
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup>
-const experiences = ref([]);
+<script setup lang="ts">
+import type { Api } from "~/types/api";
+
+const experiences = ref<Api.Experience[]>([]);
+const education = ref<Api.Education[]>([]);
 
 onMounted(async () => {
   try {
-    const experiencesResponse = await $fetch("/api/experiences");
-    if (experiencesResponse.success) {
+    const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
+      "/api/experiences"
+    );
+    const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
+      "/api/education"
+    );
+    if (experiencesResponse.success && educationResponse) {
       experiences.value = experiencesResponse.data;
+      education.value = educationResponse.data;
     } else {
-      console.error("Error fetching experiences:", experiencesResponse.error);
+      console.error(
+        "Error fetching experiences or education:",
+        experiencesResponse.error,
+        educationResponse.error
+      );
     }
   } catch (err) {
     console.error("Request failed:", err);
@@ -32,9 +54,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: bold;
-}
 .timeline {
   width: 100%;
   padding: 1rem;

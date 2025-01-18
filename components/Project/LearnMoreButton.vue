@@ -1,12 +1,5 @@
 <template>
-  <NuxtLink
-    :to="`${path}`"
-    class="btn"
-    :class="{
-      'border-black': globalStore.lightMode && !borderWhite,
-      'border-white': !globalStore.lightMode,
-    }"
-  >
+  <NuxtLink :to="`${path}`" class="btn border-white">
     <p>Learn More</p>
     <Icon
       name="material-symbols:arrow-forward-rounded"
@@ -16,20 +9,13 @@
   </NuxtLink>
 </template>
 
-<script lang="ts" setup>
-const globalStore = useGlobalStore();
-
-const props = withDefaults(
-  defineProps<{
-    path: string;
-    borderWhite?: boolean;
-  }>(),
-  {
-    borderWhite: false,
-  }
-);
-
-const { path, borderWhite } = props;
+<script setup lang="ts" >
+defineProps({
+  path: {
+    type: String,
+    required: true,
+  },
+});
 </script>
 
 <style scoped>

@@ -16,8 +16,17 @@
   </div>
 </template>
 
-<script setup>
-const { experience, isLast } = defineProps(["experience", "isLast"]);
+<script setup lang="ts">
+defineProps({
+  experience: {
+    type: Object,
+    required: true,
+  },
+  isLast: {
+    type: Boolean,
+    default: false,
+  }
+});
 </script>
 
 <style scoped>

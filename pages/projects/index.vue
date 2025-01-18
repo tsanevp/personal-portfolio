@@ -13,12 +13,14 @@
   </div>
 </template>
 
-<script setup>
-const projects = ref([]);
+<script setup lang="ts">
+import type { Api } from "~/types/api";
+
+const projects = ref<Api.Project[]>([]);
 
 onMounted(async () => {
   try {
-    const projectsResponse = await $fetch("/api/projects");
+    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>("/api/projects");
     if (projectsResponse.success) {
       projects.value = projectsResponse.data;
     } else {

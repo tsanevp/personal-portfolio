@@ -1,22 +1,30 @@
 <template>
   <div>
-    <StackSection section-header="Frontend" :stack="stack.frontend" />
-    <StackSection section-header="Backend" :stack="stack.backend" />
-    <StackSection section-header="Cloud & DevOps" :stack="stack.cloudAndDevops" />
-    <StackSection section-header="Databases" :stack="stack.databases" />
+    <StackSection section-header="Frontend" :stack="safeStack.frontend" />
+    <StackSection section-header="Backend" :stack="safeStack.backend" />
+    <StackSection section-header="Cloud & DevOps" :stack="safeStack.cloudAndDevops" />
+    <StackSection section-header="Databases" :stack="safeStack.databases" />
   </div>
 </template>
 
-<script setup>
-const stack = ref([]);
+<script setup lang="ts">
+import type { Api } from "~/types/api";
+
+const stack = ref<Api.Stack | null>(null);
+const safeStack = computed(() => ({
+  frontend: stack.value?.frontend || [],
+  backend: stack.value?.backend || [],
+  cloudAndDevops: stack.value?.cloudAndDevops || [],
+  databases: stack.value?.databases || [],
+}));
 
 onMounted(async () => {
   try {
-    const stackResponse = await $fetch("/api/stack");
+    const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
     if (stackResponse.success) {
       stack.value = stackResponse.data[0];
     } else {
-      console.error("Error fetching stack:", stack.error);
+      console.error("Error fetching stack:", stackResponse.error);
     }
   } catch (err) {
     console.error("Request failed:", err);
@@ -30,7 +38,6 @@ onMounted(async () => {
 }
 
 .stack-item:hover {
-  cursor: pointer;
   box-shadow: 0px 5px 10px var(--seoncdary-color-green);
 }
 

@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 const rootFontSize = 16;
 
 const props = withDefaults(

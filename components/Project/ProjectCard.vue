@@ -26,7 +26,6 @@
               :key="icon?.name"
               :icon-name="icon?.name"
               :icon-label="icon.label"
-              icon-color="white"
               class="border p-2 rounded-xl xs-text"
             />
           </div>
@@ -43,8 +42,8 @@
   </div>
 </template>
 
-<script setup>
-const { project } = defineProps(["project", "projectDescription"]);
+<script setup lang="ts">
+const { project } = defineProps(["project", ]);
 
 function getProjectLink() {
   const projectLink = project.projectName.replace(/\s/g, "");

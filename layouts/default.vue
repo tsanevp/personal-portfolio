@@ -9,45 +9,18 @@
 
         <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
           <ul class="flex gap-10 not-active h-full">
-            <li>
+            <li v-for="link in headerLinks">
               <NuxtLink
-                to="/"
-                :class="{ 'router-link-exact-active': $route.path === '/' }"
+                :to="link.path"
+                :class="{ 'router-link-exact-active': $route.path === `${link.path}` }"
                 class="flex h-full content-center flex-wrap"
               >
-                Home
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink
-                to="/stack"
-                :class="{ 'router-link-exact-active': $route.path === '/stack' }"
-                class="flex h-full content-center flex-wrap"
-              >
-                Stack
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink
-                to="/experiences"
-                :class="{ 'router-link-exact-active': $route.path === '/experiences' }"
-                class="flex h-full content-center flex-wrap"
-              >
-                Experience
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink
-                to="/projects"
-                :class="{ 'router-link-exact-active': $route.path === '/projects' }"
-                class="flex h-full content-center flex-wrap"
-              >
-                Projects
+                {{ link.label }}
               </NuxtLink>
             </li>
             <li>
               <a
-                href="https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing"
+                :href="resumeLink"
                 target="_blank"
                 class="flex h-full content-center flex-wrap"
               >
@@ -57,11 +30,11 @@
           </ul>
         </div>
         <div class="flex ml-auto">
-          <ToggleButton
+          <SharedToggleButton
             onIcon="tdesign:mode-dark"
             offIcon="entypo:light-up"
             @click="setLightMode()"
-            v-model="selected"
+            v-model="toggleSelected"
           />
 
           <!-- Hamburger Icon -->
@@ -75,62 +48,25 @@
 
             <!-- Navigation Links -->
             <ul
-              :class="[
-                'flex flex-col bg-black rounded-xl absolute top-16 right-0 w-1/2 z-50 transition-all duration-300 text-white font-medium',
-                showMenu ? 'opacity-100 visible' : 'opacity-0 invisible lg:visible',
-              ]"
+              class="flex flex-col bg-black rounded-xl absolute top-16 right-0 w-1/2 z-50 transition-all duration-300 text-white font-medium"
+              :class="showMenu ? 'opacity-100 visible' : 'opacity-0 invisible lg:visible'"
+              ref="dropdown"
             >
-              <li class="p-2 lg:p-0 text-center lg:text-left">
+              <li v-for="link in headerLinks" class="p-2 lg:p-0 text-center lg:text-left">
                 <NuxtLink
-                  to="/"
+                  :to="link.path"
                   class="block py-2 lg:py-0"
                   :class="{
-                    'router-link-exact-active': $route.path === '/',
-                    'green': showMenu && $route.path === '/',
+                    'router-link-exact-active': $route.path === `${link.path}`,
+                    green: showMenu && $route.path === `${link.path}`,
                   }"
-                  >Home</NuxtLink
-                >
+                  >{{ link.label }}
+                </NuxtLink>
               </li>
               <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink
-                  to="/stack"
-                  class="block py-2 lg:py-0"
-                  :class="{
-                    'router-link-exact-active': $route.path === '/stack',
-                    'green': showMenu && $route.path === '/stack',
-                  }"
-                  >Stack</NuxtLink
-                >
-              </li>
-              <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink
-                  to="/experiences"
-                  class="block py-2 lg:py-0"
-                  :class="{
-                    'router-link-exact-active': $route.path === '/experiences',
-                    'green': showMenu && $route.path === '/experiences',
-                  }"
-                  >Experience</NuxtLink
-                >
-              </li>
-              <li class="p-2 lg:p-0 text-center lg:text-left">
-                <NuxtLink
-                  to="/projects"
-                  class="block py-2 lg:py-0"
-                  :class="{
-                    'router-link-exact-active': $route.path === '/projects',
-                    'green': showMenu && $route.path === '/projects',
-                  }"
-                  >Projects</NuxtLink
-                >
-              </li>
-              <li class="p-2 lg:p-0 text-center lg:text-left">
-                <a
-                  href="https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing"
-                  target="_blank"
-                  class="block py-2 lg:py-0"
-                  >Resume</a
-                >
+                <a :href="resumeLink" target="_blank" class="block py-2 lg:py-0">
+                  Resume
+                </a>
               </li>
             </ul>
           </div>
@@ -158,18 +94,40 @@
   </div>
 </template>
 
-<script setup>
-import ToggleButton from '~/components/Shared/ToggleButton.vue';
+<script setup lang="ts">
+const resumeLink =
+  "https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing";
+const headerLinks = [
+  { path: "/", label: "Home" },
+  { path: "/stack", label: "Stack" },
+  { path: "/experiences", label: "Experience" },
+  { path: "/projects", label: "Projects" },
+];
 
-const globalStore = useGlobalStore();
-
+const toggleSelected = ref(false);
 const showMenu = ref(false);
-const selected = ref(false);
 
-function toggleMenu() {
+// Close dropdown user clicks outside div
+const dropdown = ref<HTMLElement | null>(null);
+const handleClickOutside = (event: Event) => {
+  if (dropdown.value && !dropdown.value.contains(event.target as Node)) {
+    showMenu.value = false;
+  }
+};
+
+// Close dropdown user navigated to new page
+const route = useRoute();
+watch(route, () => {
+  showMenu.value = false;
+});
+
+function toggleMenu(event: Event) {
+  event.stopPropagation();
   showMenu.value = !showMenu.value;
 }
 
+// Sets the lightmode of the entire site
+const globalStore = useGlobalStore();
 function setLightMode() {
   globalStore.setLightMode();
 
@@ -179,6 +137,14 @@ function setLightMode() {
     document.body.classList.remove("light-mode");
   }
 }
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <style lang="css" scoped>

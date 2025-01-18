@@ -10,12 +10,7 @@
     >
       <Transition name="fade">
         <div class="w-100 h-100 text-lg">
-          <Icon
-            v-if="modelValue"
-            :name="onIcon"
-            style="color: #8c8c8c"
-            class="w-100"
-          />
+          <Icon v-if="modelValue" :name="onIcon" style="color: #8c8c8c" class="w-100" />
           <Icon v-else :name="offIcon" style="color: #00dc82" class="w-100" />
         </div>
       </Transition>
