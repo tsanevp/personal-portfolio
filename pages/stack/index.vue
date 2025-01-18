@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="section-stack" class="mt-8">
     <StackSection section-header="Frontend" :stack="safeStack.frontend" />
     <StackSection section-header="Backend" :stack="safeStack.backend" />
     <StackSection section-header="Cloud & DevOps" :stack="safeStack.cloudAndDevops" />
@@ -38,10 +38,6 @@ onMounted(async () => {
 }
 
 .stack-item:hover {
-  box-shadow: 0px 5px 10px var(--seoncdary-color-green);
-}
-
-.seoncdary-color-green {
-  color: var(--seoncdary-color-green);
+  box-shadow: 0px 5px 10px var(--secondary-color-green);
 }
 </style>

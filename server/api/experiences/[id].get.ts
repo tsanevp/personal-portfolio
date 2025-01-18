@@ -6,10 +6,8 @@ export default defineEventHandler(async (event) => {
 
     // Fetch experience by id
     const experience = await Experiences.findById(id);
-
-    console.log(experience);
     if (!experience) {
-      return "Experience not found";
+      return { success: false, error: "Experience not found" };
     }
 
     return { success: true, data: experience };

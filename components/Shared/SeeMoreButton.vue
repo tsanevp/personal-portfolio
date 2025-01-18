@@ -25,6 +25,6 @@ defineProps({
 <style scoped>
 .see-more:hover {
   transition: var(--custom-transition);
-  color: var(--seoncdary-color-green);
+  color: var(--secondary-color-green);
 }
 </style>

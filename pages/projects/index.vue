@@ -1,7 +1,7 @@
 <template>
-  <div id="section-projects" class="mb-5">
+  <div id="section-projects" class="mb-5 mt-8">
     <div class="flex justify-between mb-5">
-      <h1 class="text-3xl">Projects</h1>
+      <h1>Projects</h1>
     </div>
     <div id="list-experiences">
       <ProjectCard

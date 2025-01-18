@@ -43,22 +43,17 @@
 </template>
 
 <script setup lang="ts">
-const { project } = defineProps(["project", ]);
+const { project } = defineProps(["project"]);
 
 function getProjectLink() {
   const projectLink = project.projectName.replace(/\s/g, "");
-
-  if (projectLink === "PersonalPortfolio") {
-    return "/";
-  }
-
   return `projects/${projectLink}`;
 }
 </script>
 
 <style scoped>
 .project-card {
-  box-shadow: inset 0 -75px 75px var(--seoncdary-color-green);
+  box-shadow: inset 0 -75px 75px var(--secondary-color-green);
 }
 #card-footer-contents {
   position: absolute;
@@ -74,7 +69,7 @@ function getProjectLink() {
     var(--tw-gradient-to)
   );
   --tw-gradient-from: #000000;
-  --tw-gradient-via: rgba(38, 38, 38, 0.3);
+  --tw-gradient-via: rgba(38, 38, 38, 0.5);
   --tw-gradient-to: rgba(0, 0, 0, 0);
   opacity: 1;
 }

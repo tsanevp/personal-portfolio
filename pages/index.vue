@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div id="section-about-me" class="card mt-8">
+  <div id="section-home" class="mt-8">
+    <div id="section-about-me" class="card">
       <div class="flex justify-between">
-        <h1 class="text-2xl md:text-3xl">Peter Tsanev</h1>
+        <h1>Peter Tsanev</h1>
         <Socials />
       </div>
 
@@ -11,12 +11,12 @@
         <p>Seattle, WA</p>
       </div>
 
-      <p class="text-lg">Full-stack Developer</p>
+      <p class="text-lg seoncdary-color-green">Full-stack Developer</p>
     </div>
 
     <div id="section-my-stack" class="mt-8">
       <div class="flex justify-between mb-2">
-        <h1 class="text-3xl">Current Stack</h1>
+        <h1>Current Stack</h1>
         <SharedSeeMoreButton path="/stack" />
       </div>
       <div class="mb-3">
@@ -43,7 +43,7 @@
 
     <div id="section-experience" class="mt-8">
       <div class="flex justify-between mb-7">
-        <h1 class="text-3xl">Experience</h1>
+        <h1>Experience</h1>
         <SharedSeeMoreButton path="/experiences" />
       </div>
       <div id="list-experiences" class="timeline">
@@ -56,9 +56,23 @@
       </div>
     </div>
 
+    <div id="section-education" class="">
+      <div class="mb-7">
+        <h1>Education</h1>
+      </div>
+      <div id="list-experiences" class="timeline">
+        <EducationCard
+          v-for="(item, index) in education"
+          :key="item.schoolName"
+          :education="item"
+          :is-last="index === education.length - 1"
+        />
+      </div>
+    </div>
+
     <div id="section-projects" class="mb-5">
       <div class="flex justify-between mb-5">
-        <h1 class="text-3xl">Projects</h1>
+        <h1>Projects</h1>
         <SharedSeeMoreButton path="/projects" />
       </div>
       <div id="list-experiences">
@@ -76,6 +90,7 @@
 import type { Api } from "~/types/api";
 
 const experiences = ref<Api.Experience[]>([]);
+const education = ref<Api.Education[]>([]);
 const projects = ref<Api.Project[]>([]);
 const stack = ref<Api.Stack | null>(null);
 const safeStack = computed(() => ({
@@ -90,20 +105,26 @@ onMounted(async () => {
     const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
       "/api/experiences?limit=3"
     );
+    const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
+      "/api/education"
+    );
     const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>("/api/projects");
     const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
     if (
       experiencesResponse.success &&
+      educationResponse &&
       projectsResponse.success &&
       stackResponse.success
     ) {
       experiences.value = experiencesResponse.data;
+      education.value = educationResponse.data;
       projects.value = projectsResponse.data;
       stack.value = stackResponse.data[0];
     } else {
       console.error(
-        "Error fetching experiences or projects:",
+        "Error fetching experiences, education, projects, or stack:",
         experiencesResponse.error,
+        educationResponse.error,
         projectsResponse.error,
         stackResponse.error
       );
@@ -121,5 +142,15 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+#section-education {
+  position: relative;
+  top: -1rem;
+}
+
+#section-projects {
+  position: relative;
+  top: -2.5rem;
 }
 </style>

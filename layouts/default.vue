@@ -154,7 +154,7 @@ ul > li {
 
 ul > li:hover {
   transform: scale(1.1);
-  color: var(--seoncdary-color-green);
+  color: var(--secondary-color-green);
 }
 
 .not-active {
@@ -166,6 +166,6 @@ ul > li:hover {
 }
 
 .green {
-  color: var(--seoncdary-color-green);
+  color: var(--secondary-color-green);
 }
 </style>

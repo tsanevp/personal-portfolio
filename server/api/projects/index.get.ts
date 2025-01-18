@@ -1,4 +1,4 @@
-import Projects from '../models/project';
+import Projects from '../../models/project';
 
 export default defineEventHandler(async (event) => {
   try {

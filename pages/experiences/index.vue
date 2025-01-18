@@ -1,7 +1,7 @@
 <template>
-  <div id="section-experience" class="">
+  <div id="section-experience" class="mt-8 mb-0">
     <div class="mb-7">
-      <h1 class="text-3xl mb-7">Experience</h1>
+      <h1 class="mb-7">Experience</h1>
     </div>
     <div id="list-experiences" class="timeline">
       <ExperienceCard
@@ -12,12 +12,17 @@
       />
     </div>
 
-    <div id="section-experience">
+    <div id="section-education">
       <div class="mb-7">
-        <h1 class="text-3xl">Education</h1>
+        <h1>Education</h1>
       </div>
-      <div v-for="item in education">
-        {{ item.schoolName }}
+      <div id="list-experiences" class="timeline">
+        <EducationCard
+          v-for="(item, index) in education"
+          :key="item.schoolName"
+          :education="item"
+          :is-last="index === education.length - 1"
+        />
       </div>
     </div>
   </div>

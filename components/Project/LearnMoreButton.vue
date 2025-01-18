@@ -24,7 +24,7 @@ defineProps({
 }
 
 .btn:hover {
-  background-color: var(--seoncdary-color-green);
+  background-color: var(--secondary-color-green);
   transition: var(--custom-transition);
   color: black;
   border: black 1px solid;

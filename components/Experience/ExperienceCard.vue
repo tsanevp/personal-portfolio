@@ -5,7 +5,7 @@
     </div>
     <div class="ml-8 content-card">
       <div class="mb-2">
-        <h3 class="seoncdary-color-green">{{ experience.companyName }}</h3>
+        <h3 class="secondary-color-green">{{ experience.companyName }}</h3>
         <h2 class="text-lg font-bold">{{ experience.jobTitle }}</h2>
         <h2 class="text-sm text-secondary">{{ experience.duration }}</h2>
       </div>
@@ -62,10 +62,6 @@ defineProps({
   height: 1rem;
   border: 4px var(--text-color) solid;
   border-radius: 100rem;
-  background: var(--seoncdary-color-green);
-}
-
-.seoncdary-color-green {
-  color: var(--seoncdary-color-green)
+  background: var(--secondary-color-green);
 }
 </style>

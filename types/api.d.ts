@@ -12,8 +12,9 @@ export namespace Api {
     export interface Education {
         schoolName: string;
         degree: string;
-        fieldOfStudy: string;
-        duration: string;
+        gpa: string;
+        startDate: Date;
+        endDate: Date;
         order: number;
     }
 
@@ -42,6 +43,12 @@ export namespace Api {
     export interface ApiResponse<T> {
         success: boolean;
         data: T[];
+        error?: string;
+    }
+
+    export interface ApiSingleResponse<T> {
+        success: boolean;
+        data: T;
         error?: string;
     }
 }

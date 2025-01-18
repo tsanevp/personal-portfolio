@@ -7,7 +7,7 @@
     --font-size: 16px;
     --bg-color: #141414;
     --text-color: #ffffff;
-    --seoncdary-color-green: #00dc82;
+    --secondary-color-green: #00dc82;
     --custom-transition: all 0.3s ease-in-out;
     --font-weight: inherit;
 }
@@ -41,7 +41,7 @@ body {
 .light-mode {
     --bg-color: #ffffff;
     --text-color: #141414;
-    --seoncdary-color-green: #33a06f;
+    --secondary-color-green: #33a06f;
     --font-weight: 500;
 }
 
@@ -57,7 +57,7 @@ body {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--seoncdary-color-green);
+    background-color: var(--secondary-color-green);
     transition: transform 0.25s ease-out;
     transform-origin: bottom left;
 
@@ -70,6 +70,12 @@ body {
 
 h1 {
     font-weight: bold;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.secondary-color-green {
+    color: var(--secondary-color-green);
 }
 
 /* Grid Background */

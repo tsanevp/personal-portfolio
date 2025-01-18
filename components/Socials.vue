@@ -38,7 +38,7 @@ const iconSize = computed(() => `${(rootFontSize * divSize) / 2}px`);
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--seoncdary-color-green);
+  border: 1px solid var(--secondary-color-green);
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
