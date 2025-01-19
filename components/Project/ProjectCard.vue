@@ -6,7 +6,7 @@
       <div id="project-image" class="rounded-xl">
         <img
           class="absolute left-0 top-0 h-full w-full rounded-xl group-hover:scale-105 duration-300 ease-out opacity-70"
-          :src="project.projectImageLink"
+          :src="project.projectImageLinks[0]"
           :alt="`background for ${project.projectName} project`"
         />
       </div>
@@ -26,7 +26,7 @@
               :key="icon?.name"
               :icon-name="icon?.name"
               :icon-label="icon.label"
-              class="border p-2 rounded-xl xs-text"
+              class="border border-[var(--secondary-color-green)] p-2 rounded-xl xs-text"
             />
           </div>
           <p class="">{{ project.projectDescription }}</p>
@@ -69,7 +69,7 @@ function getProjectLink() {
     var(--tw-gradient-to)
   );
   --tw-gradient-from: #000000;
-  --tw-gradient-via: rgba(38, 38, 38, 0.5);
+  --tw-gradient-via: rgba(38, 38, 38, 0.8);
   --tw-gradient-to: rgba(0, 0, 0, 0);
   opacity: 1;
 }

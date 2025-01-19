@@ -4,7 +4,9 @@ const projectSchema = new mongoose.Schema({
     projectName: { type: String, required: true },
     projectDescription: { type: String, required: true },
     projectImageLink: { type: String, required: true },
+    projectImageLinks: { type: Array, required: true },
     stack: { type: Array, required: true },
+    githubLinks: { type: Object, required: true }
 },
     { collection: "projects" }
 );

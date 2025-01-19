@@ -32,12 +32,19 @@ export namespace Api {
         databases: StackIcon[];
     }
 
+    export interface GithubLinks {
+        main: string;
+        secondary: string;
+    }
+
     export interface Project {
         _id: string;
         projectName: string;
         projectDescription: string;
         projectImageLink: string;
+        projectImageLinks: string[];
         stack: StackIcon[];
+        githubLinks: GithubLinks;
     }
 
     export interface ApiResponse<T> {

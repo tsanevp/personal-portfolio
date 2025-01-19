@@ -2,11 +2,11 @@
 <template>
   <div>
     <Carousel v-bind="carouselConfig">
-      <Slide v-for="slide in 5" :key="slide">
+      <Slide v-for="image in project?.projectImageLinks" :key="image">
         <div class="group">
           <img
             class="rounded-xl group-hover:scale-105 duration-300 ease-out h-72 shadow shadow-[var(--secondary-color-green)]"
-            :src="project?.projectImageLink"
+            :src="image"
             :alt="`background for ${project?.projectName} project`"
           />
         </div>
@@ -16,39 +16,76 @@
         <Pagination />
       </template>
     </Carousel>
-    <div class="card mt-7 mb-5 flex flex-col justify-between">
-      <h1>{{ project?.projectName }}</h1>
+    <div
+      class="card mt-7 mb-5 flex flex-col justify-between"
+      :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''"
+    >
+      <h1 class="text-2xl">{{ project?.projectName }}</h1>
 
-      <div class="mt-3">
-        <h2 class="text-xl font-bold text-secondary">Goal</h2>
-        <p>Build {{ project?.projectDescription.toLowerCase() }}</p>
+      <div class="flex flex-wrap space-x-4 mt-2">
+        <StackItem
+          v-for="icon in project?.stack"
+          :key="icon?.name"
+          :icon-name="icon?.name"
+          :icon-label="icon.label"
+          class="border border-[var(--secondary-color-green)] p-2 rounded-xl text-sm"
+        />
+      </div>
+
+      <div class="mt-3 text-secondary flex">
+        <p>{{ project?.projectDescription }}</p>
       </div>
 
       <div class="mt-3">
-        <h2 class="text-xl font-bold">Stack</h2>
-        <div class="flex flex-wrap space-x-4 mt-2">
-          <StackItem
-            v-for="icon in project?.stack"
-            :key="icon?.name"
-            :icon-name="icon?.name"
-            :icon-label="icon.label"
-            class="border p-2 rounded-xl text-xs"
-          />
+        <div v-if="Object.keys(project?.githubLinks || {}).length === 1">
+          <a
+            :href="project?.githubLinks.main"
+            target="_blank"
+            class="btn text-base"
+            :class="globalStore.getLightMode ? 'border-black' : ''"
+            >See Code</a
+          >
+        </div>
+        <div v-else class="flex flex-wrap space-x-4">
+          <a
+            :href="project?.githubLinks.main"
+            target="_blank"
+            class="btn min-w-fit"
+            :class="globalStore.getLightMode ? 'border-black' : ''"
+          >
+            Client Code
+          </a>
+          <a
+            :href="project?.githubLinks.secondary"
+            target="_blank"
+            class="btn min-w-fit"
+            :class="globalStore.getLightMode ? 'border-black' : ''"
+          >
+            Server Code
+          </a>
         </div>
       </div>
-
-      <div class="mt-3">
-        <h2 class="text-xl font-bold">Purpose</h2>
-        <p>Build {{ project?.projectDescription.toLowerCase() }}</p>
+    </div>
+    <div>
+      <div class="mt-4">
+        <h2 class="">Value</h2>
+        <ul class="list-disc mt-2 ml-7">
+          <li class="mt-1">
+            Build {{ project?.projectDescription.toLowerCase().slice(0, 70) }}
+          </li>
+          <li class="mt-1">
+            Build {{ project?.projectDescription.toLowerCase().slice(0, 70) }}
+          </li>
+        </ul>
       </div>
-
-      <a href="https://github.com/tsanevp" target="_blank" class="btn">See Code</a>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { Api } from "~/types/api";
+
+const globalStore = useGlobalStore();
 
 const carouselConfig = {
   itemsToShow: 1,
@@ -81,6 +118,12 @@ onMounted(async () => {
   color: black;
   border: black 1px solid;
   border-radius: 0.5rem;
+}
+
+h2 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: bold;
 }
 </style>
 

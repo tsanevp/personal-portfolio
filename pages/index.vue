@@ -108,7 +108,9 @@ onMounted(async () => {
     const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
       "/api/education"
     );
-    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>("/api/projects");
+    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>(
+      "/api/projects?limit=3"
+    );
     const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
     if (
       experiencesResponse.success &&
