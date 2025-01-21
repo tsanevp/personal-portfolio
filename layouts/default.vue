@@ -5,7 +5,7 @@
         id="nav-header"
         class="md:container mx-auto p-4 flex items-center justify-between relative text-xl"
       >
-        <NuxtLink to="/" class="font-bold text-2xl mr-auto">Peter Tsanev</NuxtLink>
+        <NuxtLink id="header-name" to="/" class="font-bold text-2xl mr-auto">Peter Tsanev</NuxtLink>
 
         <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
           <ul class="flex gap-10 not-active h-full">
@@ -163,6 +163,12 @@ ul > li:hover {
 
 .router-link-exact-active {
   color: var(--text-color);
+  text-decoration: underline var(--secondary-color-green) 2px;
+  text-underline-offset: 0.5rem;
+}
+
+#header-name {
+  text-decoration: none;
 }
 
 .green {

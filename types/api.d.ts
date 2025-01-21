@@ -22,6 +22,7 @@ export namespace Api {
         name: string;
         label: string;
         description?: string;
+        order: number;
     }
 
     export interface Stack {
@@ -33,8 +34,10 @@ export namespace Api {
     }
 
     export interface GithubLinks {
-        main: string;
-        secondary: string;
+        code?: string;
+        frontend?: string;
+        backend?: string;
+        liveSite?: string;
     }
 
     export interface Project {
@@ -44,7 +47,7 @@ export namespace Api {
         projectImageLink: string;
         projectImageLinks: string[];
         stack: StackIcon[];
-        githubLinks: GithubLinks;
+        links: GithubLinks;
     }
 
     export interface ApiResponse<T> {

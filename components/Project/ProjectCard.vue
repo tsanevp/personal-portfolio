@@ -26,7 +26,7 @@
               :key="icon?.name"
               :icon-name="icon?.name"
               :icon-label="icon.label"
-              class="border border-[var(--secondary-color-green)] p-2 rounded-xl xs-text"
+              class="border p-2 rounded-xl xs-text"
             />
           </div>
           <p class="">{{ project.projectDescription }}</p>

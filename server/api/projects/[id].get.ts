@@ -5,8 +5,6 @@ export default defineEventHandler(async (event) => {
     const { id } = event.context.params as { id: string };
     const projectName = id.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
 
-    console.log(projectName);
-
     // Fetch project by id
     const project = await Projects.findOne({ projectName: projectName });
     if (!project) {

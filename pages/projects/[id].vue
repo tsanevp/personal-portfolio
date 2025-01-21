@@ -5,7 +5,7 @@
       <Slide v-for="image in project?.projectImageLinks" :key="image">
         <div class="group">
           <img
-            class="rounded-xl group-hover:scale-105 duration-300 ease-out h-72 shadow shadow-[var(--secondary-color-green)]"
+            class="rounded-xl group-hover:scale-105 duration-300 ease-out shadow shadow-[var(--secondary-color-green)]"
             :src="image"
             :alt="`background for ${project?.projectName} project`"
           />
@@ -28,7 +28,7 @@
           :key="icon?.name"
           :icon-name="icon?.name"
           :icon-label="icon.label"
-          class="border border-[var(--secondary-color-green)] p-2 rounded-xl text-sm"
+          class="border p-2 rounded-xl text-sm"
         />
       </div>
 
@@ -37,31 +37,42 @@
       </div>
 
       <div class="mt-3">
-        <div v-if="Object.keys(project?.githubLinks || {}).length === 1">
+        <div class="flex flex-wrap space-x-4">
           <a
-            :href="project?.githubLinks.main"
-            target="_blank"
-            class="btn text-base"
-            :class="globalStore.getLightMode ? 'border-black' : ''"
-            >See Code</a
-          >
-        </div>
-        <div v-else class="flex flex-wrap space-x-4">
-          <a
-            :href="project?.githubLinks.main"
+            v-if="project?.links.liveSite"
+            :href="project?.links.liveSite"
             target="_blank"
             class="btn min-w-fit"
             :class="globalStore.getLightMode ? 'border-black' : ''"
           >
-            Client Code
+            Live Site
           </a>
           <a
-            :href="project?.githubLinks.secondary"
+            v-if="project?.links.frontend"
+            :href="project?.links.frontend"
             target="_blank"
             class="btn min-w-fit"
             :class="globalStore.getLightMode ? 'border-black' : ''"
           >
-            Server Code
+          Client Code
+          </a>
+          <a
+            v-if="project?.links.backend"
+            :href="project?.links.backend"
+            target="_blank"
+            class="btn min-w-fit"
+            :class="globalStore.getLightMode ? 'border-black' : ''"
+          >
+          Server Code
+          </a>
+          <a
+            v-if="project?.links.code"
+            :href="project?.links.code"
+            target="_blank"
+            class="btn min-w-fit"
+            :class="globalStore.getLightMode ? 'border-black' : ''"
+          >
+          See Code
           </a>
         </div>
       </div>
@@ -124,6 +135,11 @@ h2 {
   font-size: 1.125rem;
   line-height: 1.75rem;
   font-weight: bold;
+}
+
+img {
+  max-height: 30rem;
+  max-width: 37.5rem;
 }
 </style>
 
