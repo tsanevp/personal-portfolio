@@ -1,13 +1,5 @@
 <template>
   <div id="section-projects" class="mb-5 mt-8">
-   
-    <!-- <div id="list-experiences">
-      <ProjectCard
-        v-for="project in projects.values()"
-        :key="project.projectName"
-        :project="project"
-      />
-    </div> -->
     <div id="project">
       <ProjectSection
         v-for="project in projects.values()"

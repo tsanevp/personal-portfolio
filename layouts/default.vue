@@ -99,9 +99,9 @@ const resumeLink =
   "https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing";
 const headerLinks = [
   { path: "/", label: "Home" },
-  { path: "/stack", label: "Stack" },
   { path: "/experiences", label: "Experience" },
   { path: "/projects", label: "Projects" },
+  { path: "/stack", label: "Stack" },
 ];
 
 const toggleSelected = ref(false);

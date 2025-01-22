@@ -2,81 +2,44 @@
   <div class="card">
     <div>
       <h1>{{ project?.projectName }}</h1>
+
+      <div class="mt-2 text-secondary flex">
+        <p>{{ project?.projectDescription }}</p>
+      </div>
     </div>
 
-    <Carousel v-bind="carouselConfig" class="mt-5">
-      <Slide v-for="image in project?.projectImageLinks" :key="image">
-        <div class="group">
-          <img
-            class="rounded-lg group-hover:scale-105 duration-300 ease-out shadow shadow-[var(--secondary-color-green)]"
-            :src="image"
-            :alt="`background for ${project?.projectName} project`"
-          />
-        </div>
-      </Slide>
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+    <div class="mt-5">
+      <h2>Screenshots</h2>
+      <Carousel v-bind="carouselConfig" class="">
+        <Slide v-for="image in project?.projectImageLinks" :key="image">
+          <div class="group">
+            <img
+              class="thumbnail rounded-lg group-hover:scale-105 duration-300 ease-out shadow shadow-[var(--secondary-color-green)]"
+              :src="image"
+              :alt="`background for ${project?.projectName} project`"
+              @click="openImage(image)"
+            />
+          </div>
+        </Slide>
+        <template #addons>
+          <Navigation />
+          <Pagination />
+        </template>
+      </Carousel>
 
-    <div
-      class="mt-7 mb-5 flex flex-col justify-between"
-      :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''"
-    >
+      <ProjectLinks :project="project" class="mt-5" />
+    </div>
+
+    <div class="mt-5" :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''">
+      <h2>Built With</h2>
       <div class="flex flex-wrap space-x-4 mt-2">
         <StackItem
           v-for="icon in project?.stack"
           :key="icon?.name"
           :icon-name="icon?.name"
           :icon-label="icon.label"
-          class="border p-2 rounded-lg text-sm"
+          class="border p-2 rounded-lg xs-text"
         />
-      </div>
-
-      <div class="mt-3 text-secondary flex">
-        <p>{{ project?.projectDescription }}</p>
-      </div>
-
-      <div class="mt-3">
-        <div class="flex flex-wrap space-x-4">
-          <a
-            v-if="project?.links.liveSite"
-            :href="project?.links.liveSite"
-            target="_blank"
-            class="btn min-w-fit"
-            :class="globalStore.getLightMode ? 'border-black' : ''"
-          >
-            Live Site
-          </a>
-          <a
-            v-if="project?.links.frontend"
-            :href="project?.links.frontend"
-            target="_blank"
-            class="btn min-w-fit"
-            :class="globalStore.getLightMode ? 'border-black' : ''"
-          >
-            Client Code
-          </a>
-          <a
-            v-if="project?.links.backend"
-            :href="project?.links.backend"
-            target="_blank"
-            class="btn min-w-fit"
-            :class="globalStore.getLightMode ? 'border-black' : ''"
-          >
-            Server Code
-          </a>
-          <a
-            v-if="project?.links.code"
-            :href="project?.links.code"
-            target="_blank"
-            class="btn min-w-fit"
-            :class="globalStore.getLightMode ? 'border-black' : ''"
-          >
-            See Code
-          </a>
-        </div>
       </div>
 
       <div class="mt-4">
@@ -91,6 +54,15 @@
         </ul>
       </div>
     </div>
+
+    <div v-if="isImageOpen" class="modal" @click.self="closeImage">
+      <div class="modal-content">
+        <img :src="imageSource" alt="Enlarged img" class="enlarged-image rounded-lg" />
+        <button class="close-btn text-lg w-8 h-8 rounded-lg" @click="closeImage">
+          X
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -103,21 +75,22 @@ const carouselConfig = {
   itemsToShow: 1,
   wrapAround: true,
 };
+
+const isImageOpen = ref(false);
+const imageSource = ref("");
+
+const openImage = (image: string) => {
+  isImageOpen.value = true;
+  imageSource.value = image;
+};
+
+const closeImage = () => {
+  isImageOpen.value = false;
+  imageSource.value = "";
+};
 </script>
 
 <style scoped>
-.btn {
-  transition: all 0.5s ease;
-}
-
-.btn:hover {
-  background-color: var(--secondary-color-green);
-  transition: var(--custom-transition);
-  color: black;
-  border: black 1px solid;
-  border-radius: 0.5rem;
-}
-
 h2 {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -125,8 +98,69 @@ h2 {
 }
 
 img {
+  cursor: pointer;
   max-height: 30rem;
   max-width: 37.5rem;
+}
+
+/** Enlarged image modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enlarged-image {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 2%;
+  right: 6%;
+  background: white;
+  color: black;
+  border: black 1px solid;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.close-btn:hover {
+  background-color: var(--secondary-color-green);
+  color: black;
+  border: black 1px solid;
+}
+
+@media (max-width: 375px) {
+    .xs-text {
+        font-size: 10px;
+        /* Scale down for smaller screens */
+    }
+}
+
+@media (max-width: 340px) {
+    .xs-text {
+        font-size: 8px;
+        /* Scale down for smaller screens */
+    }
 }
 </style>
 

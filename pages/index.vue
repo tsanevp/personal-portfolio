@@ -7,7 +7,7 @@
       </div>
 
       <div class="flex mb-2 text-secondary">
-        <Icon name="gis:pin" style="align-self: center" class="mr-2" />
+        <Icon name="gis:pin" style="align-self: center;" class="mr-1" />
         <p>Seattle, WA</p>
       </div>
 
@@ -33,7 +33,7 @@
         <h2 class="text-xl mb-1 text-secondary">Backend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
           <StackItem
-            v-for="icon in safeStack.backend"
+            v-for="icon in limitedBackend"
             :icon-name="icon.name"
             :icon-label="icon.label"
           />
@@ -135,6 +135,10 @@ onMounted(async () => {
     console.error("Request failed:", err);
   }
 });
+
+const limitedBackend = computed(() =>
+  stack.value?.backend.slice(0, stack.value?.frontend.length)
+);
 </script>
 
 <style scoped>
