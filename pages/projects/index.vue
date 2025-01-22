@@ -7,10 +7,10 @@
       <ProjectSection
         :key="project.projectName"
         :project="project"
-        :class="index !== 0 ? 'mt-20' : ''"
+        :class="index !== 0 ? 'mt-14' : ''"
       />
 
-      <!-- <hr v-if="index !== projects.length - 1" class="half-border mt-10 mx-auto" /> -->
+      <hr v-if="index !== projectStore.getProjects.length - 1" class="half-border mt-14 mx-auto" />
     </div>
   </div>
 </template>
@@ -35,8 +35,7 @@ onMounted(() => {
 }
 
 .half-border {
-  width: 25%;
   border: none;
-  border-bottom: 2px dashed var(--secondary-color-green);
+  border-bottom: 2px solid var(--text-color);
 }
 </style>

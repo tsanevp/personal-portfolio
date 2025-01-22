@@ -6,7 +6,9 @@ const projectSchema = new mongoose.Schema({
     projectImageLink: { type: String, required: true },
     projectImageLinks: { type: Array, required: true },
     stack: { type: Array, required: true },
-    githubLinks: { type: Object, required: true }
+    githubLinks: { type: Object, required: true },
+    value: { type: Array, required: true },
+    order: { type: Number, required: true }
 },
     { collection: "projects" }
 );

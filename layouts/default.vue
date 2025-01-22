@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 const resumeLink =
-  "https://drive.google.com/file/d/1Moj5pPJDZtKwaVwtGMm0iKZiz_rSgHB_/view?usp=sharing";
+  "https://drive.google.com/file/d/1MHf0K90xZoodkEMB0PtPo4LmMZKlamU_/view?usp=sharing";
 const headerLinks = [
   { path: "/", label: "Home" },
   { path: "/experiences", label: "Experience" },

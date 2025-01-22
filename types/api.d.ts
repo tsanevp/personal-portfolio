@@ -48,6 +48,8 @@ export namespace Api {
         projectImageLinks: string[];
         stack: StackIcon[];
         links: GithubLinks;
+        value: string[];
+        order: number;
     }
 
     export interface ApiResponse<T> {

@@ -14,7 +14,7 @@
       <p class="text-lg seoncdary-color-green">Full-stack Developer</p>
     </div>
 
-    <div id="section-my-stack" class="mt-8">
+    <div id="section-my-stack" class="mt-12">
       <div class="flex justify-between mb-2">
         <h1>Current Stack</h1>
         <SharedSeeMoreButton path="/stack" />
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div id="section-experience" class="mt-8">
+    <div id="section-experience" class="mt-12">
       <div class="flex justify-between mb-7">
         <h1>Experience</h1>
         <SharedSeeMoreButton path="/experiences" />
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div id="section-education" class="">
+    <div id="section-education" class="mt-4">
       <div class="mb-7">
         <h1>Education</h1>
       </div>
@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <div id="section-projects" class="mb-5">
+    <div id="section-projects" class="mt-4 mb-5">
       <div class="flex justify-between mb-5">
         <h1>Projects</h1>
         <SharedSeeMoreButton path="/projects" />

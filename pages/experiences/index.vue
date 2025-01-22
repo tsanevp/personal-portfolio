@@ -12,7 +12,7 @@
       />
     </div>
 
-    <div id="section-education">
+    <div id="section-education" class="mt-4">
       <div class="mb-7">
         <h1>Education</h1>
       </div>

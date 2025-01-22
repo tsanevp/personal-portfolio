@@ -6,6 +6,7 @@
       :href="project.links[key]"
       :target="project.links[key] === '/' ? '_self' : '_blank'"
       class="btn border-[var(--secondary-color-green)] text-base min-w-28"
+      :title="getTitle(label)"
     >
       {{ label }}
     </a>
@@ -31,6 +32,10 @@ const filteredLinks = computed(() => {
     return acc;
   }, {} as Record<string, string>);
 });
+
+const getTitle = function (label: string) {
+  return label === "Live Site" ? "Server may take up to 2 minutes to initialize" : "";
+};
 </script>
 
 <style scoped>

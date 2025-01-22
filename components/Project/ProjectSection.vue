@@ -29,7 +29,7 @@
       <ProjectLinks :project="project" class="mt-5" />
     </div>
 
-    <div class="mt-8 card" :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''">
+    <div class="mt-8" :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''">
       <h2>Stack</h2>
       <div class="flex flex-wrap space-x-4 mt-2">
         <StackItem
@@ -45,11 +45,8 @@
       <div class="mt-5">
         <h2 class="">Value</h2>
         <ul class="list-disc mt-2 ml-7">
-          <li class="mt-1">
-            Build {{ project?.projectDescription.toLowerCase().slice(0, 70) }}
-          </li>
-          <li class="mt-1">
-            Build {{ project?.projectDescription.toLowerCase().slice(0, 70) }}
+          <li v-for="item in project?.value" class="mt-1">
+            {{ item }}
           </li>
         </ul>
       </div>
