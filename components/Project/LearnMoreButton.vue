@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`${path}`" class="btn border-white">
+  <NuxtLink :to="{path: '/projects', hash: targetId ? `#${targetId}` : ''}" class="btn border-white">
     <p>Learn More</p>
     <Icon
       name="material-symbols:arrow-forward-rounded"
@@ -11,7 +11,7 @@
 
 <script setup lang="ts" >
 defineProps({
-  path: {
+  targetId: {
     type: String,
     required: true,
   },

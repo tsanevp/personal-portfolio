@@ -2,7 +2,7 @@
   <div
     class="group project-card mb-7 md:min-h-[450px] sm:min-h-[375px] xs:min-h-[300px] min-h-[300px] flex flex-col justify-end relative overflow-hidden text-white"
   >
-    <NuxtLink :to="getProjectLink()" style="margin-unset">
+    <NuxtLink :to="{path: '/projects', hash: getTargetId() ? `#${getTargetId()}` : ''}" style="margin-unset">
       <div id="project-image" class="rounded-xl">
         <img
           class="absolute left-0 top-0 h-full w-full rounded-lg group-hover:scale-105 duration-300 ease-out"
@@ -35,7 +35,7 @@
         <div
           class="lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
         >
-          <ProjectLearnMoreButton :path="getProjectLink()" :border-white="true" class="mt-3" />
+          <ProjectLearnMoreButton :target-id="getTargetId()" :border-white="true" class="mt-3" />
         </div>
       </div>
     </NuxtLink>
@@ -45,9 +45,8 @@
 <script setup lang="ts">
 const { project } = defineProps(["project"]);
 
-function getProjectLink() {
-  const projectLink = project.projectName.replace(/\s/g, "");
-  return `projects/${projectLink}`;
+function getTargetId() {
+  return project.projectName.replace(/\s/g, "");
 }
 </script>
 

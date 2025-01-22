@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div :id="getTargetId()" class="project-section">
     <div>
       <h1>{{ project?.projectName }}</h1>
 
@@ -8,9 +8,8 @@
       </div>
     </div>
 
-    <div class="mt-5">
-      <h2>Screenshots</h2>
-      <Carousel v-bind="carouselConfig" class="">
+    <div class="mt-4">
+      <Carousel v-bind="carouselConfig">
         <Slide v-for="image in project?.projectImageLinks" :key="image">
           <div class="group">
             <img
@@ -30,8 +29,8 @@
       <ProjectLinks :project="project" class="mt-5" />
     </div>
 
-    <div class="mt-5" :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''">
-      <h2>Built With</h2>
+    <div class="mt-8 card" :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''">
+      <h2>Stack</h2>
       <div class="flex flex-wrap space-x-4 mt-2">
         <StackItem
           v-for="icon in project?.stack"
@@ -39,10 +38,11 @@
           :icon-name="icon?.name"
           :icon-label="icon.label"
           class="border p-2 rounded-lg xs-text"
+          :class="globalStore.getLightMode ? 'border-black' : ''"
         />
       </div>
 
-      <div class="mt-4">
+      <div class="mt-5">
         <h2 class="">Value</h2>
         <ul class="list-disc mt-2 ml-7">
           <li class="mt-1">
@@ -88,6 +88,10 @@ const closeImage = () => {
   isImageOpen.value = false;
   imageSource.value = "";
 };
+
+function getTargetId() {
+  return project.projectName.replace(/\s/g, "");
+}
 </script>
 
 <style scoped>
@@ -150,17 +154,17 @@ img {
 }
 
 @media (max-width: 375px) {
-    .xs-text {
-        font-size: 10px;
-        /* Scale down for smaller screens */
-    }
+  .xs-text {
+    font-size: 10px;
+    /* Scale down for smaller screens */
+  }
 }
 
 @media (max-width: 340px) {
-    .xs-text {
-        font-size: 8px;
-        /* Scale down for smaller screens */
-    }
+  .xs-text {
+    font-size: 8px;
+    /* Scale down for smaller screens */
+  }
 }
 </style>
 

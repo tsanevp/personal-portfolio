@@ -1,64 +1,50 @@
 <template>
-  <div class="flex flex-wrap space-x-4">
+  <div class="flex flex-wrap justify-center space-x-4">
     <a
-      v-if="project?.links.liveSite"
-      :href="project?.links.liveSite"
+      v-for="(label, key) in filteredLinks"
+      :key="key"
+      :href="project.links[key]"
       target="_blank"
-      class="btn min-w-fit"
-      :class="globalStore.getLightMode ? 'border-black' : ''"
+      class="btn border-[var(--secondary-color-green)] text-base min-w-28"
     >
-      Live Site
-    </a>
-    <a
-      v-if="project?.links.frontend"
-      :href="project?.links.frontend"
-      target="_blank"
-      class="btn min-w-fit"
-      :class="globalStore.getLightMode ? 'border-black' : ''"
-    >
-      Client Code
-    </a>
-    <a
-      v-if="project?.links.backend"
-      :href="project?.links.backend"
-      target="_blank"
-      class="btn min-w-fit"
-      :class="globalStore.getLightMode ? 'border-black' : ''"
-    >
-      Server Code
-    </a>
-    <a
-      v-if="project?.links.code"
-      :href="project?.links.code"
-      target="_blank"
-      class="btn min-w-fit"
-      :class="globalStore.getLightMode ? 'border-black' : ''"
-    >
-      See Code
+      {{ label }}
     </a>
   </div>
 </template>
 
-<script lang="ts" setup>
-const globalStore = useGlobalStore();
+<script setup lang="ts">
+const { project } = defineProps(["project"]);
 
-defineProps({
-  project: {
-    type: Object,
-    required: true,
-  },
+// Filter the links to include only those with valid URLs
+const filteredLinks = computed(() => {
+  const labels: Record<string, string> = {
+    liveSite: "Live Site",
+    frontend: "Client Code",
+    backend: "Server Code",
+    code: "See Code",
+  };
+
+  return Object.entries(labels).reduce((acc, [key, label]) => {
+    if (project.links?.[key]) {
+      acc[key] = label;
+    }
+    return acc;
+  }, {} as Record<string, string>);
 });
 </script>
 
 <style scoped>
+a {
+  display: flex;
+  justify-content: center;
+}
+
 .btn {
-  transition: all 0.5s ease;
-  font-size: var(--font-size);
+  transition: var(--custom-transition);
 }
 
 .btn:hover {
   background-color: var(--secondary-color-green);
-  transition: var(--custom-transition);
   color: black;
   border: black 1px solid;
   border-radius: 0.5rem;
