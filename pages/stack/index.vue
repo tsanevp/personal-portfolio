@@ -8,28 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Api } from "~/types/api";
+const stackStore = useStackStore();
 
-const stack = ref<Api.Stack | null>(null);
 const safeStack = computed(() => ({
-  frontend: stack.value?.frontend || [],
-  backend: stack.value?.backend || [],
-  cloudAndDevops: stack.value?.cloudAndDevops || [],
-  databases: stack.value?.databases || [],
+  frontend: stackStore.getStack?.frontend || [],
+  backend: stackStore.getStack?.backend || [],
+  cloudAndDevops: stackStore.getStack?.cloudAndDevops || [],
+  databases: stackStore.getStack?.databases || [],
 }));
-
-onMounted(async () => {
-  try {
-    const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
-    if (stackResponse.success) {
-      stack.value = stackResponse.data[0];
-    } else {
-      console.error("Error fetching stack:", stackResponse.error);
-    }
-  } catch (err) {
-    console.error("Request failed:", err);
-  }
-});
 </script>
 
 <style scoped>

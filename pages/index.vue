@@ -7,7 +7,7 @@
       </div>
 
       <div class="flex mb-2 text-secondary">
-        <Icon name="gis:pin" style="align-self: center;" class="mr-1" />
+        <Icon name="gis:pin" style="align-self: center" class="mr-1" />
         <p>Seattle, WA</p>
       </div>
 
@@ -23,7 +23,7 @@
         <h2 class="text-xl mb-1 text-secondary">Frontend</h2>
         <div class="flex flex-wrap gap-5 text-lg">
           <StackItem
-            v-for="icon in safeStack.frontend"
+            v-for="icon in stackStore.getStack?.frontend"
             :icon-name="icon.name"
             :icon-label="icon.label"
           />
@@ -48,10 +48,10 @@
       </div>
       <div id="list-experiences" class="timeline">
         <ExperienceCard
-          v-for="(experience, index) in experiences"
+          v-for="(experience, index) in experienceStore.getExperiences.slice(0, 3)"
           :key="experience.companyName + experience.duration"
           :experience="experience"
-          :is-last="index === experiences.length - 1"
+          :is-last="index === experienceStore.getExperiences.slice(0, 3).length - 1"
         />
       </div>
     </div>
@@ -62,10 +62,10 @@
       </div>
       <div id="list-experiences" class="timeline">
         <EducationCard
-          v-for="(item, index) in education"
+          v-for="(item, index) in educationStore.getEducation"
           :key="item.schoolName"
           :education="item"
-          :is-last="index === education.length - 1"
+          :is-last="index === educationStore.getEducation.length - 1"
         />
       </div>
     </div>
@@ -77,7 +77,7 @@
       </div>
       <div id="list-experiences">
         <ProjectCard
-          v-for="project in projects.values()"
+          v-for="project in projectStore.getProjects.slice(0, 3).values()"
           :key="project.projectName"
           :project="project"
         />
@@ -87,57 +87,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Api } from "~/types/api";
-
-const experiences = ref<Api.Experience[]>([]);
-const education = ref<Api.Education[]>([]);
-const projects = ref<Api.Project[]>([]);
-const stack = ref<Api.Stack | null>(null);
-const safeStack = computed(() => ({
-  frontend: stack.value?.frontend || [],
-  backend: stack.value?.backend || [],
-  cloudAndDevops: stack.value?.cloudAndDevops || [],
-  databases: stack.value?.databases || [],
-}));
-
-onMounted(async () => {
-  try {
-    const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
-      "/api/experiences?limit=3"
-    );
-    const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
-      "/api/education"
-    );
-    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>(
-      "/api/projects?limit=3"
-    );
-    const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
-    if (
-      experiencesResponse.success &&
-      educationResponse &&
-      projectsResponse.success &&
-      stackResponse.success
-    ) {
-      experiences.value = experiencesResponse.data;
-      education.value = educationResponse.data;
-      projects.value = projectsResponse.data;
-      stack.value = stackResponse.data[0];
-    } else {
-      console.error(
-        "Error fetching experiences, education, projects, or stack:",
-        experiencesResponse.error,
-        educationResponse.error,
-        projectsResponse.error,
-        stackResponse.error
-      );
-    }
-  } catch (err) {
-    console.error("Request failed:", err);
-  }
-});
+const experienceStore = useExperienceStore();
+const projectStore = useProjectStore();
+const stackStore = useStackStore();
+const educationStore = useEducationStore();
 
 const limitedBackend = computed(() =>
-  stack.value?.backend.slice(0, stack.value?.frontend.length)
+  stackStore.getStack?.backend.slice(0, stackStore.getStack?.frontend.length)
 );
 </script>
 

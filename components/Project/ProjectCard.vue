@@ -31,12 +31,6 @@
           </div>
           <p>{{ project.projectDescription }}</p>
         </div>
-
-        <div
-          class="lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 group-hover:opacity-100 transform ease-in-out duration-300"
-        >
-          <ProjectLearnMoreButton :target-id="getTargetId()" :border-white="true" class="mt-3" />
-        </div>
       </div>
     </NuxtLink>
   </div>
@@ -70,7 +64,7 @@ function getTargetId() {
     var(--tw-gradient-from),
     var(--tw-gradient-via),
     var(--tw-gradient-to)
-    75%
+    70%
   );
   --tw-gradient-from: #000000;
   --tw-gradient-via: rgba(0, 0, 0, .85);

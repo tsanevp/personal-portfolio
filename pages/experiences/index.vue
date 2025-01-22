@@ -5,10 +5,10 @@
     </div>
     <div id="list-experiences" class="timeline">
       <ExperienceCard
-        v-for="(experience, index) in experiences"
+        v-for="(experience, index) in experienceStore.getExperiences"
         :key="experience.companyName + experience.duration"
         :experience="experience"
-        :is-last="index === experiences.length - 1"
+        :is-last="index === experienceStore.getExperiences.length - 1"
       />
     </div>
 
@@ -18,10 +18,10 @@
       </div>
       <div id="list-experiences" class="timeline">
         <EducationCard
-          v-for="(item, index) in education"
+          v-for="(item, index) in educationStore.getEducation"
           :key="item.schoolName"
           :education="item"
-          :is-last="index === education.length - 1"
+          :is-last="index === educationStore.getEducation.length - 1"
         />
       </div>
     </div>
@@ -29,33 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Api } from "~/types/api";
-
-const experiences = ref<Api.Experience[]>([]);
-const education = ref<Api.Education[]>([]);
-
-onMounted(async () => {
-  try {
-    const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
-      "/api/experiences"
-    );
-    const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
-      "/api/education"
-    );
-    if (experiencesResponse.success && educationResponse) {
-      experiences.value = experiencesResponse.data;
-      education.value = educationResponse.data;
-    } else {
-      console.error(
-        "Error fetching experiences or education:",
-        experiencesResponse.error,
-        educationResponse.error
-      );
-    }
-  } catch (err) {
-    console.error("Request failed:", err);
-  }
-});
+const experienceStore = useExperienceStore();
+const educationStore = useEducationStore();
 </script>
 
 <style scoped>

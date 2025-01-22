@@ -1,41 +1,12 @@
 import { defineStore } from 'pinia'
-
-interface Experience {
-  _id: string;
-  jobTitle: string;
-  duration: string;
-  description: string;
-  link: string;
-  order: string;
-}
-
-interface ExperienceResponse {
-  success: boolean;
-  data: Experience[];
-  error?: string;
-}
+import type { Api } from '~/types/api';
 
 export const useExperienceStore = defineStore('experience', {
   state: () => ({
-    experiences: [] as Experience[],
+    experiences: [] as Api.Experience[],
   }),
   actions: {
-    async fetchExperiencesFromDb() {
-      try {
-        const experiencesResponse = await $fetch<ExperienceResponse>("/api/experiences");
-        if (experiencesResponse.success) {
-          this.setExperiences(experiencesResponse.data);
-        } else {
-          console.error(
-            "Error fetching experiences:",
-            experiencesResponse.error,
-          );
-        }
-      } catch (err) {
-        console.error("Request failed:", err);
-      }
-    },
-    setExperiences(experiences: Experience[]) {
+    setExperiences(experiences: Api.Experience[]) {
       this.experiences = experiences;
     },
   },

@@ -4,7 +4,7 @@
       v-for="(label, key) in filteredLinks"
       :key="key"
       :href="project.links[key]"
-      target="_blank"
+      :target="project.links[key] === '/' ? '_self' : '_blank'"
       class="btn border-[var(--secondary-color-green)] text-base min-w-28"
     >
       {{ label }}
