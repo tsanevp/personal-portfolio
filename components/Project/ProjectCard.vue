@@ -5,7 +5,7 @@
     <NuxtLink :to="getProjectLink()" style="margin-unset">
       <div id="project-image" class="rounded-xl">
         <img
-          class="absolute left-0 top-0 h-full w-full rounded-xl group-hover:scale-105 duration-300 ease-out opacity-70"
+          class="absolute left-0 top-0 h-full w-full rounded-lg group-hover:scale-105 duration-300 ease-out"
           :src="project.projectImageLinks[0]"
           :alt="`background for ${project.projectName} project`"
         />
@@ -15,21 +15,21 @@
       <div class="absolute inset-0 bg-gradient-to-t via-transparent to-transparent"></div>
 
       <!-- Content Area -->
-      <div id="card-footer" class="p-7">
+      <div id="card-footer" class="p-5 pb-7">
         <div
           class="lg:translate-y-12 lg:group-hover:translate-y-0 transform ease-in-out duration-300"
         >
           <h2 class="text-2xl mb-2">{{ project.projectName }}</h2>
-          <div class="flex flex-wrap space-x-4 mb-4">
+          <div class="flex flex-wrap space-x-4 mb-2">
             <StackItem
               v-for="icon in project.stack"
               :key="icon?.name"
               :icon-name="icon?.name"
               :icon-label="icon.label"
-              class="border p-2 rounded-xl xs-text"
+              class="border p-2 rounded-lg xs-text"
             />
           </div>
-          <p class="">{{ project.projectDescription }}</p>
+          <p>{{ project.projectDescription }}</p>
         </div>
 
         <div
@@ -53,8 +53,12 @@ function getProjectLink() {
 
 <style scoped>
 .project-card {
-  box-shadow: inset 0 -75px 75px var(--secondary-color-green);
+  transition: all ease-in-out 300ms;
 }
+.project-card:hover {
+  box-shadow: 0px 5px 10px var(--secondary-color-green);
+}
+
 #card-footer-contents {
   position: absolute;
   bottom: 0;
@@ -67,9 +71,10 @@ function getProjectLink() {
     var(--tw-gradient-from),
     var(--tw-gradient-via),
     var(--tw-gradient-to)
+    75%
   );
   --tw-gradient-from: #000000;
-  --tw-gradient-via: rgba(38, 38, 38, 0.8);
+  --tw-gradient-via: rgba(0, 0, 0, .85);
   --tw-gradient-to: rgba(0, 0, 0, 0);
   opacity: 1;
 }

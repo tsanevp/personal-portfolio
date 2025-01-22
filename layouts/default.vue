@@ -3,9 +3,9 @@
     <header>
       <nav
         id="nav-header"
-        class="md:container mx-auto p-4 flex items-center justify-between relative text-xl"
+        class="md:container mx-auto p-4 flex items-center justify-between relative text-lg"
       >
-        <NuxtLink id="header-name" to="/" class="font-bold text-2xl mr-auto">Peter Tsanev</NuxtLink>
+        <NuxtLink id="header-name" to="/" class="font-bold mr-auto">Peter Tsanev</NuxtLink>
 
         <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
           <ul class="flex gap-10 not-active h-full">
@@ -48,7 +48,7 @@
 
             <!-- Navigation Links -->
             <ul
-              class="flex flex-col bg-black rounded-xl absolute top-16 right-0 w-1/2 z-50 transition-all duration-300 text-white font-medium"
+              class="flex flex-col bg-black rounded-lg absolute top-16 right-0 w-1/2 z-50 transition-all duration-300 text-white font-medium"
               :class="showMenu ? 'opacity-100 visible' : 'opacity-0 invisible lg:visible'"
               ref="dropdown"
             >

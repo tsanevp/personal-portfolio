@@ -1,19 +1,26 @@
 <template>
   <div id="section-projects" class="mb-5 mt-8">
-    <div class="flex justify-between mb-5">
-      <h1>Projects</h1>
-    </div>
-    <div id="list-experiences">
+   
+    <!-- <div id="list-experiences">
       <ProjectCard
         v-for="project in projects.values()"
         :key="project.projectName"
         :project="project"
+      />
+    </div> -->
+    <div id="project">
+      <ProjectSection
+        v-for="project in projects.values()"
+        :key="project.projectName"
+        :project="project"
+        class="mt-10"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import ProjectSection from "~/components/Project/ProjectSection.vue";
 import type { Api } from "~/types/api";
 
 const projects = ref<Api.Project[]>([]);

@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`${path}`"
-    class="flex flex-wrap content-center hover-underline-animation see-more"
+    class="flex flex-wrap text-secondary content-center hover-underline-animation see-more"
   >
     <p class="pb-0">See More</p>
     <Icon

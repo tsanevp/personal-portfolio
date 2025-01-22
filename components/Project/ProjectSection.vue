@@ -1,7 +1,10 @@
-<!-- pages/projects/[id].vue -->
 <template>
-  <div>
-    <Carousel v-bind="carouselConfig">
+  <div class="card">
+    <div>
+      <h1>{{ project?.projectName }}</h1>
+    </div>
+
+    <Carousel v-bind="carouselConfig" class="mt-5">
       <Slide v-for="image in project?.projectImageLinks" :key="image">
         <div class="group">
           <img
@@ -16,12 +19,11 @@
         <Pagination />
       </template>
     </Carousel>
+
     <div
-      class="card mt-7 mb-5 flex flex-col justify-between"
+      class="mt-7 mb-5 flex flex-col justify-between"
       :class="globalStore.getLightMode ? 'bg-[#f0f0f0]' : ''"
     >
-      <h1 class="text-2xl">{{ project?.projectName }}</h1>
-
       <div class="flex flex-wrap space-x-4 mt-2">
         <StackItem
           v-for="icon in project?.stack"
@@ -54,7 +56,7 @@
             class="btn min-w-fit"
             :class="globalStore.getLightMode ? 'border-black' : ''"
           >
-          Client Code
+            Client Code
           </a>
           <a
             v-if="project?.links.backend"
@@ -63,7 +65,7 @@
             class="btn min-w-fit"
             :class="globalStore.getLightMode ? 'border-black' : ''"
           >
-          Server Code
+            Server Code
           </a>
           <a
             v-if="project?.links.code"
@@ -72,12 +74,11 @@
             class="btn min-w-fit"
             :class="globalStore.getLightMode ? 'border-black' : ''"
           >
-          See Code
+            See Code
           </a>
         </div>
       </div>
-    </div>
-    <div>
+
       <div class="mt-4">
         <h2 class="">Value</h2>
         <ul class="list-disc mt-2 ml-7">
@@ -93,8 +94,8 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import type { Api } from "~/types/api";
+<script setup lang="ts">
+const { project } = defineProps(["project"]);
 
 const globalStore = useGlobalStore();
 
@@ -102,20 +103,6 @@ const carouselConfig = {
   itemsToShow: 1,
   wrapAround: true,
 };
-
-// Fetch project data based on the route
-const route = useRoute();
-const project = ref<Api.Project | null>(null);
-
-onMounted(async () => {
-  const projectId = route.params.id;
-
-  const projectResponse = await $fetch<Api.ApiSingleResponse<Api.Project>>(
-    `/api/projects/${projectId}`
-  );
-
-  project.value = projectResponse.data;
-});
 </script>
 
 <style scoped>
