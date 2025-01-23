@@ -1,4 +1,6 @@
 <template>
+  <Analytics />
+  <SpeedInsights />
   <NuxtLayout name="default" />
 </template>
 
