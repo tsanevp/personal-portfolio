@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { Analytics } from '@vercel/analytics/vue';
-import { SpeedInsights } from "@vercel/speed-insights/nuxt"
+import { Analytics } from "@vercel/analytics/vue";
+import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 import type { Api } from "~/types/api";
 
 const experienceStore = useExperienceStore();
@@ -15,16 +15,14 @@ const stackStore = useStackStore();
 const educationStore = useEducationStore();
 
 onServerPrefetch(async () => {
-    try {
+  try {
     const experiencesResponse = await $fetch<Api.ApiResponse<Api.Experience>>(
       "/api/experiences"
     );
     const educationResponse = await $fetch<Api.ApiResponse<Api.Education>>(
       "/api/education"
     );
-    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>(
-      "/api/projects"
-    );
+    const projectsResponse = await $fetch<Api.ApiResponse<Api.Project>>("/api/projects");
     const stackResponse = await $fetch<Api.ApiResponse<Api.Stack>>("/api/stack");
     if (
       experiencesResponse.success &&
